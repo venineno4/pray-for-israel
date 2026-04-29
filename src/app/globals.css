@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-primary-white text-text-dark antialiased;
+  }
+}
+
+/* Custom styles for animations or specific components if needed */
