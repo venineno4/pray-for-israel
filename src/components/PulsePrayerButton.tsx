@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { sendGAEvent } from "@next/third-parties/google";
 import { useState, useEffect, useRef } from "react";
 import CountryModal from "./CountryModal";
 import { supabase } from "@/utils/supabaseClient";
@@ -41,6 +42,10 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
 
   const handleButtonClick = async () => {
     if (!isActive) {
+      // Fire GA4 event safely — never blocks UI
+      try {
+        sendGAEvent('event', 'pray_button_clicked', { method: 'click' });
+      } catch (_) {}
       // Start praying -> Open Modal
       setIsModalOpen(true);
     } else {
