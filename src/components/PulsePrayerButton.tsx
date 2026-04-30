@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import CountryModal from "./CountryModal";
 import { supabase } from "@/utils/supabaseClient";
 
-export default function PulsePrayerButton({ label = "Join the Prayer" }: { label?: string }) {
+export default function PulsePrayerButton({ label = "I am Praying Now" }: { label?: string }) {
   const [isActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sessionId, setSessionId] = useState("");
@@ -72,14 +72,14 @@ export default function PulsePrayerButton({ label = "Join the Prayer" }: { label
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-4">
-      <div className="relative flex items-center justify-center w-full min-h-[220px]">
+    <div className="flex flex-col items-center justify-center py-2 md:py-4">
+      <div className="relative flex items-center justify-center w-full min-h-[160px] md:min-h-[220px]">
         {/* Outer Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none"
-            initial={{ width: 110, height: 110, opacity: 0.5 }}
-            animate={{ width: 220, height: 220, opacity: 0 }}
+            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none w-20 h-20 md:w-28 md:h-28"
+            initial={{ scale: 1, opacity: 0.5 }}
+            animate={{ scale: 2, opacity: 0 }}
             transition={{
               duration: 2,
               repeat: Infinity,
@@ -91,9 +91,9 @@ export default function PulsePrayerButton({ label = "Join the Prayer" }: { label
         {/* Second Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none"
-            initial={{ width: 110, height: 110, opacity: 0.5 }}
-            animate={{ width: 180, height: 180, opacity: 0 }}
+            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none w-20 h-20 md:w-28 md:h-28"
+            initial={{ scale: 1, opacity: 0.5 }}
+            animate={{ scale: 1.6, opacity: 0 }}
             transition={{
               duration: 2,
               repeat: Infinity,
@@ -109,8 +109,8 @@ export default function PulsePrayerButton({ label = "Join the Prayer" }: { label
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`
-            relative z-10 flex items-center justify-center w-28 h-28 rounded-full 
-            shadow-2xl font-bold text-base transition-colors duration-500
+            relative z-10 flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full 
+            shadow-2xl font-bold text-sm md:text-base transition-colors duration-500
             ${isActive 
               ? 'bg-primary-deepBlue text-primary-white border-[3px] border-primary-gold' 
               : 'bg-primary-gold text-primary-deepBlue'
@@ -120,9 +120,15 @@ export default function PulsePrayerButton({ label = "Join the Prayer" }: { label
           {isActive ? "Praying..." : label}
         </motion.button>
       </div>
-      <p className="mt-2 text-xs font-medium text-text-dark opacity-70 text-center max-w-[200px]">
-        {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to start praying"}
+      <p className="mt-2 md:mt-3 text-xs md:text-sm font-medium text-text-dark opacity-80 text-center max-w-[240px]">
+        {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to add your light to the global map."}
       </p>
+      
+      {!isActive && (
+        <p className="mt-1 md:mt-2 text-[10px] md:text-[11px] leading-tight text-text-dark opacity-50 text-center max-w-[280px]">
+          Pray silently in your own words, wherever you are. This is a live tracker, not an audio/video room.
+        </p>
+      )}
 
       {/* Share Section */}
       <AnimatePresence>
@@ -135,7 +141,7 @@ export default function PulsePrayerButton({ label = "Join the Prayer" }: { label
           >
             <h4 className="text-gray-500 font-semibold text-xs mb-2">Spread the Word</h4>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(`I just joined the global prayer for Israel from ${selectedCountry}! 🇮🇱🌍 Join us live here: https://prayforisrael.live`)}`}
+              href={`https://wa.me/?text=${encodeURIComponent(`I just joined the global prayer for Israel from ${selectedCountry}! 🙏🕎🌍 Join us live here: https://prayforisrael.live`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-1.5 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-1.5 rounded-full text-sm font-medium transition-colors shadow"

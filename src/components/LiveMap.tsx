@@ -21,10 +21,10 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <ComposableMap
-        projectionConfig={{ scale: 140 }}
+        projectionConfig={{ scale: 180, center: [0, 5] }}
         width={800}
-        height={400}
-        style={{ width: "100%", height: "100%", maxHeight: "250px" }}
+        height={500}
+        style={{ width: "100%", height: "auto" }}
       >
         <Geographies geography={geoUrl}>
           {({ geographies }) =>

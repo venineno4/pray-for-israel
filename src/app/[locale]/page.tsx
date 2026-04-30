@@ -6,21 +6,21 @@ export default function Home() {
   const t = useTranslations('Index');
   
   return (
-    <main className="min-h-screen flex flex-col items-center py-6 px-4 bg-primary-white">
+    <main className="min-h-screen flex flex-col items-center py-3 md:py-6 px-3 md:px-4 bg-primary-white">
       {/* Header Section */}
-      <div className="text-center max-w-4xl mb-6 mt-4">
-        <h1 className="text-4xl md:text-5xl font-black text-primary-deepBlue mb-2 tracking-tight">
+      <div className="text-center max-w-4xl mb-3 md:mb-6 mt-1 md:mt-4">
+        <h1 className="text-3xl md:text-5xl font-black text-primary-deepBlue mb-1 md:mb-2 leading-tight tracking-tight">
           {t('title')}
         </h1>
-        <p className="text-lg md:text-xl text-text-dark opacity-80 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm md:text-xl text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-2xl mx-auto">
           {t('description')}
         </p>
       </div>
 
       {/* Desktop Grid Wrapper */}
-      <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-4">
+      <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-1 md:mt-4">
         {/* Main Interactive Button - Left Column */}
-        <div className="mb-8 lg:mb-0 flex justify-center lg:sticky lg:top-8">
+        <div className="mb-4 lg:mb-0 flex justify-center lg:sticky lg:top-8">
           <PulsePrayerButton label={t('ctaButton')} />
         </div>
 

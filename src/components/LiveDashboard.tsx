@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
-import { getFlagForCountry } from "@/utils/countries";
+import { getFlagForCountry, COUNTRIES } from "@/utils/countries";
 import LiveMap from "./LiveMap";
 
 type TimeRange = 1 | 24 | 720 | 8760;
@@ -140,45 +140,36 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
         // Country Aggregation
         const countryMap = new Map<string, { total: number, unique: Set<string> }>();
         
-        // Ensure all predefined countries are listed even if they have 0 prayers
-        import('@/utils/countries').then(({ COUNTRIES }) => {
-          COUNTRIES.forEach(c => {
-            if (!countryMap.has(c.name)) {
-              countryMap.set(c.name, { total: 0, unique: new Set() });
-            }
-          });
-          
-          allData.forEach(row => {
-            if (!countryMap.has(row.country)) {
-              countryMap.set(row.country, { total: 0, unique: new Set() });
-            }
-            const cData = countryMap.get(row.country)!;
-            cData.total += 1;
-            cData.unique.add(row.session_id);
-          });
-
-          const newCountryStats: CountryStat[] = [];
-          countryMap.forEach((val, country) => {
-            newCountryStats.push({
-              country,
-              total_prayers: val.total,
-              unique_prayers: val.unique.size
-            });
-          });
-
-          // Sort dynamically based on metric
-          newCountryStats.sort((a, b) => {
-            if (metricType === 'unique') {
-              if (b.unique_prayers !== a.unique_prayers) return b.unique_prayers - a.unique_prayers;
-              return b.total_prayers - a.total_prayers;
-            } else {
-              if (b.total_prayers !== a.total_prayers) return b.total_prayers - a.total_prayers;
-              return b.unique_prayers - a.unique_prayers;
-            }
-          });
-
-          setCountryStats(newCountryStats);
+        allData.forEach(row => {
+          if (!countryMap.has(row.country)) {
+            countryMap.set(row.country, { total: 0, unique: new Set() });
+          }
+          const cData = countryMap.get(row.country)!;
+          cData.total += 1;
+          cData.unique.add(row.session_id);
         });
+
+        const newCountryStats: CountryStat[] = [];
+        countryMap.forEach((val, country) => {
+          newCountryStats.push({
+            country,
+            total_prayers: val.total,
+            unique_prayers: val.unique.size
+          });
+        });
+
+        // Sort dynamically based on metric
+        newCountryStats.sort((a, b) => {
+          if (metricType === 'unique') {
+            if (b.unique_prayers !== a.unique_prayers) return b.unique_prayers - a.unique_prayers;
+            return b.total_prayers - a.total_prayers;
+          } else {
+            if (b.total_prayers !== a.total_prayers) return b.total_prayers - a.total_prayers;
+            return b.unique_prayers - a.unique_prayers;
+          }
+        });
+
+        setCountryStats(newCountryStats);
 
       } catch (err) {
         console.error("Error fetching historical stats:", err);
@@ -198,7 +189,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
       className="w-full bg-primary-white rounded-2xl shadow-xl border border-gray-100 flex flex-col overflow-hidden"
     >
       {/* Unified Header */}
-      <div className="bg-primary-deepBlue px-5 py-3 flex justify-between items-center border-b-4 border-primary-gold">
+      <div className="bg-primary-deepBlue px-3 md:px-5 py-2 md:py-3 flex justify-between items-center border-b-4 border-primary-gold">
         <h2 className="text-lg font-bold text-primary-white flex items-center space-x-2">
           <span>Prayer Statistics</span>
         </h2>
@@ -213,15 +204,15 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
       <div className="flex flex-col">
         {/* Top Half: Live Stats & Map */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 p-3 md:p-5">
           {/* Live Counter & Badges */}
-          <div className="flex flex-col items-center lg:items-start justify-center">
-            <p className="text-gray-500 text-xs uppercase tracking-widest font-semibold mb-1">Currently Praying</p>
+          <div className="flex flex-col items-center lg:items-start justify-center mb-2 md:mb-0">
+            <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest font-semibold mb-1">Currently Praying</p>
             <motion.div 
               key={activeCount}
               initial={{ scale: 1.1, color: "#D4AF37" }}
               animate={{ scale: 1, color: "#0B2B5A" }}
-              className="text-5xl font-black text-primary-deepBlue leading-none"
+              className="text-4xl md:text-5xl font-black text-primary-deepBlue leading-none"
             >
               {activeCount.toLocaleString()}
             </motion.div>
@@ -247,22 +238,13 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
                 onChange={(e) => setSelectedCountry(e.target.value)}
               >
                 <option value="All">All Countries (Live)</option>
-                <option value="United States">United States</option>
-                <option value="Israel">Israel</option>
-                <option value="Brazil">Brazil</option>
-                <option value="South Korea">South Korea</option>
-                <option value="Germany">Germany</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Canada">Canada</option>
-                <option value="Australia">Australia</option>
-                <option value="France">France</option>
-                <option value="Italy">Italy</option>
+                {COUNTRIES.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
               </select>
             </div>
           </div>
 
           {/* Mini Live Map */}
-          <div className="w-full flex items-center justify-center bg-[#081e42] rounded-xl overflow-hidden shadow-inner min-h-[150px]">
+          <div className="w-full flex items-center justify-center bg-blue-100 rounded-xl overflow-hidden shadow-inner max-h-[160px] md:max-h-none">
             <LiveMap activeCountries={liveBreakdown.map(i => i.country)} />
           </div>
         </div>
@@ -270,9 +252,9 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
         <div className="w-full h-px bg-gray-100"></div>
 
         {/* Bottom Half: Historical Stats */}
-        <div className="flex flex-col bg-gray-50/50 p-5">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-4">
-            <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">Historical Analytics</h3>
+        <div className="flex flex-col bg-gray-50/50 p-3 md:p-5">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 md:gap-3 mb-3 md:mb-4">
+            <h3 className="text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider">Historical Analytics</h3>
             <div className="flex space-x-2">
               <select 
                 className="pl-2 pr-7 py-1 text-xs border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-gold rounded-md shadow-sm bg-white"
@@ -313,12 +295,12 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
             </div>
 
             <div className="w-full lg:w-2/3">
-              <ul className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+              <ul className="space-y-1 md:space-y-2 max-h-[250px] md:max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                 {isLoadingHistory ? (
                   <div className="text-center text-gray-400 text-xs py-4">Loading data...</div>
                 ) : countryStats.length > 0 ? (
                   countryStats.map((stat, idx) => (
-                    <li key={stat.country} className="flex justify-between items-center text-gray-700 bg-white px-3 py-1.5 rounded border border-gray-100 shadow-sm">
+                    <li key={stat.country} className="flex justify-between items-center text-gray-700 bg-white px-2 py-1 md:px-3 md:py-1.5 rounded border border-gray-100 shadow-sm">
                       <div className="flex items-center space-x-2">
                         <span className="text-gray-400 text-xs w-4">{idx + 1}.</span>
                         <span className="text-base leading-none">{getFlagForCountry(stat.country)}</span>
