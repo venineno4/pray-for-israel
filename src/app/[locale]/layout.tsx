@@ -14,7 +14,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   const description = "Join the global live prayer for Israel from your country. See who is praying worldwide right now!";
   const url = "https://prayforisrael.live";
   // Absolute URL required — WhatsApp & Facebook crawlers do NOT follow relative paths
-  const ogImage = "https://prayforisrael.live/og-image.png";
+  const ogImage = "https://prayforisrael.live/og-share-image.png";
+  const ogImageWidth = 1024;
+  const ogImageHeight = 1024;
 
   return {
     title: title,
@@ -29,9 +31,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       images: [
         {
           url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: 'Pray for Israel Live Map',
+          width: ogImageWidth,
+          height: ogImageHeight,
+          alt: 'Pray for Israel — You are not praying alone.',
         },
       ],
       locale: locale,
