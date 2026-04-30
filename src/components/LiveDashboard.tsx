@@ -37,7 +37,6 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
       let query = supabase
         .from("prayers")
         .select("country")
-        .eq("is_active", true)
         .gte("started_at", fiveMinsAgo);
 
       if (selectedCountry !== "All") {
@@ -111,7 +110,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
         while (true) {
           const { data, error } = await supabase
             .from("prayers")
-            .select("session_id, country")
+            .select("session_id, user_id, country")
             .gte("started_at", limitDate)
             .range(count, count + 999);
             
@@ -146,7 +145,8 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
           }
           const cData = countryMap.get(row.country)!;
           cData.total += 1;
-          cData.unique.add(row.session_id);
+          // Use user_id if available (persistent), fall back to session_id
+          cData.unique.add(row.user_id || row.session_id);
         });
 
         const newCountryStats: CountryStat[] = [];
@@ -301,14 +301,20 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
                 ) : countryStats.length > 0 ? (
                   countryStats.map((stat, idx) => (
                     <li key={stat.country} className="flex justify-between items-center text-gray-700 bg-white px-2 py-1 md:px-3 md:py-1.5 rounded border border-gray-100 shadow-sm">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-gray-400 text-xs w-4">{idx + 1}.</span>
-                        <span className="text-base leading-none">{getFlagForCountry(stat.country)}</span>
-                        <span className="font-medium text-sm">{stat.country}</span>
+                      <div className="flex items-center space-x-2 min-w-0">
+                        <span className="text-gray-400 text-xs w-4 shrink-0">{idx + 1}.</span>
+                        <span className="text-base leading-none shrink-0">{getFlagForCountry(stat.country)}</span>
+                        <span className="font-medium text-sm truncate">{stat.country}</span>
                       </div>
-                      <span className="font-semibold text-primary-deepBlue text-sm">
-                        {Number(metricType === 'unique' ? stat.unique_prayers : stat.total_prayers).toLocaleString()}
-                      </span>
+                      <div className="flex items-center gap-2 shrink-0 ml-2">
+                        <span className="text-[10px] text-gray-400 font-medium">
+                          <span className="text-primary-deepBlue font-bold">{stat.unique_prayers.toLocaleString()}</span> unique
+                        </span>
+                        <span className="text-gray-200">|</span>
+                        <span className="text-[10px] text-gray-400 font-medium">
+                          <span className="text-primary-gold font-bold">{stat.total_prayers.toLocaleString()}</span> total
+                        </span>
+                      </div>
                     </li>
                   ))
                 ) : (

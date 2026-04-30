@@ -10,13 +10,23 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
   const [isActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sessionId, setSessionId] = useState("");
+  const [userId, setUserId] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Generate a session ID on mount
+    // Per-session ID: unique to this browser tab / prayer session
     setSessionId(crypto.randomUUID());
-    
+
+    // Persistent anonymous user ID: survives page reloads
+    // This lets us count truly unique people across sessions
+    let storedUserId = localStorage.getItem("pfi_user_id");
+    if (!storedUserId) {
+      storedUserId = crypto.randomUUID();
+      localStorage.setItem("pfi_user_id", storedUserId);
+    }
+    setUserId(storedUserId);
+
     // Cleanup timeout on unmount
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -62,7 +72,12 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
     try {
       await supabase
         .from("prayers")
-        .insert([{ session_id: sessionId, country: country, is_active: true }]);
+        .insert([{
+          session_id: sessionId,
+          user_id: userId,        // persistent anonymous ID for unique tracking
+          country: country,
+          is_active: true,
+        }]);
         
       // Set 5-minute timeout (300,000 ms) to automatically toggle off
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
