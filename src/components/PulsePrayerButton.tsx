@@ -56,6 +56,12 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
       try {
         sendGAEvent('event', 'pray_button_clicked', { method: 'click' });
       } catch (_) {}
+      // Fire Meta Pixel custom event safely
+      try {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('trackCustom', 'PrayButtonClicked');
+        }
+      } catch (_) {}
       // Start praying -> Open Modal
       setIsModalOpen(true);
     } else {

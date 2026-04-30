@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import MetaPixel from '@/components/MetaPixel';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -73,6 +74,7 @@ export default async function RootLayout({
           {children}
         </NextIntlClientProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
+        <MetaPixel />
       </body>
     </html>
   );
