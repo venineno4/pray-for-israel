@@ -11,9 +11,10 @@ import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const title = "Pray for Israel Live | 24/7 Global Prayer Map";
-  const description = "Take part in a 24/7 global prayer movement for Israel. Pray silently wherever you are, and watch your country light up on the live map.";
+  const description = "Join the global live prayer for Israel from your country. See who is praying worldwide right now!";
   const url = "https://prayforisrael.live";
-  const ogImage = "/og-image.png";
+  // Absolute URL required — WhatsApp & Facebook crawlers do NOT follow relative paths
+  const ogImage = "https://prayforisrael.live/og-image.png";
 
   return {
     title: title,

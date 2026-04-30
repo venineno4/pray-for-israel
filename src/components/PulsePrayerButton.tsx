@@ -141,7 +141,7 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
           >
             <h4 className="text-gray-500 font-semibold text-xs mb-2">Spread the Word</h4>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(`I just joined the global prayer for Israel from ${selectedCountry}! 🙏🕎🌍 Join us live here: https://prayforisrael.live`)}`}
+              href={`https://wa.me/?text=${encodeURIComponent("I just joined the global prayer for Israel from " + selectedCountry + "! \uD83D\uDE4F\uD83D\uDD4E\uD83C\uDF0D Join us live: https://prayforisrael.live")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-1.5 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-1.5 rounded-full text-sm font-medium transition-colors shadow"
