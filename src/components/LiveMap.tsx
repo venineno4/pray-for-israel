@@ -22,30 +22,28 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
     <div className="w-full h-full flex items-center justify-center">
       <style>{`
         @keyframes activeCountryPulse {
-          0% {
-            fill: #E6C245;
-            filter: drop-shadow(0 0 4px rgba(230, 194, 69, 0.5));
+          0%, 100% {
+            fill: #FFE066 !important;
+            filter: drop-shadow(0 0 6px rgba(255, 224, 102, 0.8));
           }
           50% {
-            fill: #FFF8D6;
-            filter: drop-shadow(0 0 12px rgba(255, 248, 214, 0.9));
-          }
-          100% {
-            fill: #E6C245;
-            filter: drop-shadow(0 0 4px rgba(230, 194, 69, 0.5));
+            fill: #FFFFFF !important;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
           }
         }
         .country-active {
-          animation: activeCountryPulse 4s ease-in-out infinite;
-          outline: none;
+          animation: activeCountryPulse 3s ease-in-out infinite !important;
+          outline: none !important;
+          stroke: #FFE066 !important;
+          stroke-width: 0.8px !important;
         }
         .country-inactive {
-          fill: #1e3a5f;
-          transition: fill 250ms ease-in-out;
-          outline: none;
+          fill: #1e3a5f !important;
+          transition: fill 250ms ease-in-out !important;
+          outline: none !important;
         }
         .country-inactive:hover {
-          fill: #2a4d7d;
+          fill: #2a4d7d !important;
         }
       `}</style>
       <ComposableMap
