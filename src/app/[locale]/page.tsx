@@ -20,7 +20,7 @@ export default function Home() {
       {/* Desktop Grid Wrapper */}
       <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-1 md:mt-4">
         {/* Main Interactive Button - Left Column */}
-        <div className="mb-4 lg:mb-0 flex justify-center lg:sticky lg:top-8">
+        <div className="mb-2 lg:mb-0 flex justify-center lg:sticky lg:top-8">
           <PulsePrayerButton label={t('ctaButton')} />
         </div>
 

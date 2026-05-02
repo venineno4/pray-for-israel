@@ -98,8 +98,8 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-2 md:py-4">
-      <div className="relative flex items-center justify-center w-full min-h-[160px] md:min-h-[220px]">
+    <div className="flex flex-col items-center justify-center py-1 md:py-4">
+      <div className="relative flex items-center justify-center w-full min-h-[130px] md:min-h-[220px]">
         {/* Outer Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
@@ -146,7 +146,7 @@ export default function PulsePrayerButton({ label = "I am Praying Now" }: { labe
           {isActive ? "Praying..." : label}
         </motion.button>
       </div>
-      <p className="mt-2 md:mt-3 text-xs md:text-sm font-medium text-text-dark opacity-80 text-center max-w-[240px]">
+      <p className="mt-0 md:mt-4 text-3xl md:text-4xl font-black text-primary-deepBlue text-center max-w-[400px] leading-[1.1] tracking-tight">
         {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to add your light to the global map."}
       </p>
       

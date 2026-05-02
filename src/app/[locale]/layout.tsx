@@ -4,11 +4,10 @@ import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import MetaPixel from '@/components/MetaPixel';
+import Script from 'next/script';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-
-import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const title = "Pray for Israel Live | 24/7 Global Prayer Map";
@@ -66,6 +65,7 @@ export default async function RootLayout({
   params: { locale }
 }: RootLayoutProps) {
   const messages = await getMessages();
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <html lang={locale}>
@@ -73,8 +73,39 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
+        
+        {gaId && <GoogleAnalytics gaId={gaId} />}
         <MetaPixel />
+
+        {/* OneSignal SDK */}
+        <Script
+          src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+          strategy="afterInteractive"
+        />
+        
+        {/* OneSignal Init */}
+        <Script id="onesignal-init" strategy="afterInteractive">
+          {`
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+              OneSignal.init({
+                appId: "${process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID || 'ca6f9c1b-5b6f-4338-9eca-4a6ba408f3eb'}",
+                safari_web_id: "${process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_ID || 'web.onesignal.auto.2c31ff0c-1624-4aec-8f89-a4f0b1da0ea1'}",
+                notifyButton: {
+                  enable: false,
+                },
+                allowLocalhostAsSecureOrigin: true,
+                chrome_web_icon: "https://prayforisrael.live/onesignal-icon.png",
+                firefox_icon: "https://prayforisrael.live/onesignal-icon.png",
+                welcomeNotification: {
+                  "title": "Pray for Israel Live",
+                  "message": "Thanks for subscribing!",
+                  "icon": "https://prayforisrael.live/onesignal-icon.png"
+                }
+              });
+            });
+          `}
+        </Script>
       </body>
     </html>
   );
