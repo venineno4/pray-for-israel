@@ -179,20 +179,33 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
             initial={{ opacity: 0, y: 10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: 10, height: 0 }}
-            className="mt-4 flex flex-col items-center overflow-hidden"
+            className="mt-4 flex flex-row items-center justify-center space-x-3 overflow-hidden bg-gray-50/80 px-4 py-2 rounded-full border border-gray-100 shadow-sm"
           >
-            <h4 className="text-gray-500 font-semibold text-xs mb-2">Invite someone to pray</h4>
-            <a
-              href={`https://wa.me/?text=${encodeURIComponent("I just joined the global prayer for Israel from " + selectedCountry + "! \uD83D\uDE4F\uD83D\uDD4E\uD83C\uDF0D Join us live: https://prayforisrael.live")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-1.5 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-1.5 rounded-full text-sm font-medium transition-colors shadow"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.031 0C5.385 0 0 5.387 0 12.035c0 2.124.553 4.195 1.604 6.01L.068 23.553l5.655-1.483c1.745.952 3.716 1.455 5.753 1.455h.004c6.645 0 12.029-5.386 12.029-12.034C23.509 5.388 18.127 0 12.031 0zm0 21.526c-1.802 0-3.567-.485-5.116-1.403l-.367-.217-3.805.998.995-3.71-.238-.378a9.99 9.99 0 01-1.536-5.414c0-5.513 4.485-9.998 10.005-9.998 2.673 0 5.184 1.042 7.073 2.932 1.888 1.89 2.928 4.402 2.928 7.075 0 5.511-4.484 9.998-9.995 9.998zm5.485-7.498c-.3-.15-1.78-.88-2.056-.98-.276-.101-.477-.15-.677.15-.2.3-.777.98-.952 1.18-.175.2-.35.226-.65.076-1.537-.773-2.616-1.396-3.626-2.585-.26-.307.03-.292.32-.58.05-.05.1-.115.15-.175.05-.06.065-.1.1-.166.035-.065.018-.126-.007-.176-.025-.05-.676-1.63-.925-2.231-.244-.588-.49-.508-.675-.517-.176-.008-.377-.008-.577-.008s-.525.075-.801.375c-.276.3-.926.906-.926 2.208 0 1.303.951 2.563 1.086 2.763.136.201 1.879 2.981 4.618 4.218 1.554.703 2.146.762 2.842.64.487-.086 1.487-.607 1.696-1.194.21-.588.21-1.092.147-1.195-.063-.102-.263-.152-.564-.303z"/>
-              </svg>
-              <span>Invite via WhatsApp</span>
-            </a>
+            <h4 className="text-gray-500 font-semibold text-xs whitespace-nowrap">Invite someone to pray</h4>
+            <div className="flex items-center space-x-2">
+              <a
+                href={`https://wa.me/?text=${encodeURIComponent("I just joined the global prayer for Israel from " + selectedCountry + "! \uD83D\uDE4F\uD83D\uDD4E\uD83C\uDF0D Join us live: https://prayforisrael.live")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full transition-colors shadow"
+                aria-label="Share on WhatsApp"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.031 0C5.385 0 0 5.387 0 12.035c0 2.124.553 4.195 1.604 6.01L.068 23.553l5.655-1.483c1.745.952 3.716 1.455 5.753 1.455h.004c6.645 0 12.029-5.386 12.029-12.034C23.509 5.388 18.127 0 12.031 0zm0 21.526c-1.802 0-3.567-.485-5.116-1.403l-.367-.217-3.805.998.995-3.71-.238-.378a9.99 9.99 0 01-1.536-5.414c0-5.513 4.485-9.998 10.005-9.998 2.673 0 5.184 1.042 7.073 2.932 1.888 1.89 2.928 4.402 2.928 7.075 0 5.511-4.484 9.998-9.995 9.998zm5.485-7.498c-.3-.15-1.78-.88-2.056-.98-.276-.101-.477-.15-.677.15-.2.3-.777.98-.952 1.18-.175.2-.35.226-.65.076-1.537-.773-2.616-1.396-3.626-2.585-.26-.307.03-.292.32-.58.05-.05.1-.115.15-.175.05-.06.065-.1.1-.166.035-.065.018-.126-.007-.176-.025-.05-.676-1.63-.925-2.231-.244-.588-.49-.508-.675-.517-.176-.008-.377-.008-.577-.008s-.525.075-.801.375c-.276.3-.926.906-.926 2.208 0 1.303.951 2.563 1.086 2.763.136.201 1.879 2.981 4.618 4.218 1.554.703 2.146.762 2.842.64.487-.086 1.487-.607 1.696-1.194.21-.588.21-1.092.147-1.195-.063-.102-.263-.152-.564-.303z"/>
+                </svg>
+              </a>
+              <a
+                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://prayforisrael.live")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-8 h-8 bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-full transition-colors shadow"
+                aria-label="Share on Facebook"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                </svg>
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
