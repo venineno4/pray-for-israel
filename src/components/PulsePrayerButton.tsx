@@ -97,17 +97,33 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
     }
   };
 
+  const renderLabel = () => {
+    if (isActive) return <span className="text-lg md:text-2xl tracking-wider">Praying...</span>;
+    
+    if (label.includes("&")) {
+      const parts = label.split("&");
+      return (
+        <div className="flex flex-col items-center justify-center leading-none">
+          <span className="text-3xl md:text-5xl font-black uppercase tracking-widest">{parts[0].trim()}</span>
+          <span className="text-2xl md:text-4xl font-serif italic opacity-80 my-1 md:my-2">&amp;</span>
+          <span className="text-3xl md:text-5xl font-black uppercase tracking-widest">{parts[1].trim()}</span>
+        </div>
+      );
+    }
+    return <span className="text-lg md:text-2xl font-bold">{label}</span>;
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center py-1 md:py-4">
-      <div className="relative flex items-center justify-center w-full min-h-[130px] md:min-h-[220px]">
+    <div className="flex flex-col items-center justify-center py-2 md:py-8">
+      <div className="relative flex items-center justify-center w-full min-h-[160px] md:min-h-[280px]">
         {/* Outer Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none w-20 h-20 md:w-28 md:h-28"
+            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none w-32 h-32 md:w-48 md:h-48"
             initial={{ scale: 1, opacity: 0.5 }}
-            animate={{ scale: 2, opacity: 0 }}
+            animate={{ scale: 2.2, opacity: 0 }}
             transition={{
-              duration: 2,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeOut",
             }}
@@ -117,14 +133,14 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         {/* Second Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none w-20 h-20 md:w-28 md:h-28"
+            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none w-32 h-32 md:w-48 md:h-48"
             initial={{ scale: 1, opacity: 0.5 }}
             animate={{ scale: 1.6, opacity: 0 }}
             transition={{
-              duration: 2,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeOut",
-              delay: 0.5,
+              delay: 0.6,
             }}
           />
         )}
@@ -135,15 +151,15 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`
-            relative z-10 flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full 
-            shadow-2xl font-bold text-sm md:text-base transition-colors duration-500
+            relative z-10 flex items-center justify-center w-32 h-32 md:w-48 md:h-48 rounded-full 
+            shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-colors duration-500
             ${isActive 
-              ? 'bg-primary-deepBlue text-primary-white border-[3px] border-primary-gold' 
+              ? 'bg-primary-deepBlue text-primary-white border-4 border-primary-gold' 
               : 'bg-primary-gold text-primary-deepBlue'
             }
           `}
         >
-          {isActive ? "Praying..." : label}
+          {renderLabel()}
         </motion.button>
       </div>
       <p className="mt-0 md:mt-4 text-3xl md:text-4xl font-black text-primary-deepBlue text-center max-w-[400px] leading-[1.1] tracking-tight">

@@ -20,6 +20,34 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
+      <style>{`
+        @keyframes activeCountryPulse {
+          0% {
+            fill: #E6C245;
+            filter: drop-shadow(0 0 4px rgba(230, 194, 69, 0.5));
+          }
+          50% {
+            fill: #FFF8D6;
+            filter: drop-shadow(0 0 12px rgba(255, 248, 214, 0.9));
+          }
+          100% {
+            fill: #E6C245;
+            filter: drop-shadow(0 0 4px rgba(230, 194, 69, 0.5));
+          }
+        }
+        .country-active {
+          animation: activeCountryPulse 4s ease-in-out infinite;
+          outline: none;
+        }
+        .country-inactive {
+          fill: #1e3a5f;
+          transition: fill 250ms ease-in-out;
+          outline: none;
+        }
+        .country-inactive:hover {
+          fill: #2a4d7d;
+        }
+      `}</style>
       <ComposableMap
         projectionConfig={{ scale: 180, center: [0, 5] }}
         width={800}
@@ -36,12 +64,12 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={isMatch ? "#D4AF37" : "#1e3a5f"}
+                  className={isMatch ? "country-active" : "country-inactive"}
                   stroke="#0B2B5A"
                   strokeWidth={0.5}
                   style={{
-                    default: { outline: "none", transition: "all 250ms" },
-                    hover: { fill: isMatch ? "#F3D55A" : "#2a4d7d", outline: "none", transition: "all 250ms" },
+                    default: { outline: "none" },
+                    hover: { outline: "none" },
                     pressed: { outline: "none" },
                   }}
                 />
