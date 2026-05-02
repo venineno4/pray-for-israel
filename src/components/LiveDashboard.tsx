@@ -246,7 +246,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
           {/* Mini Live Map */}
           <div className="flex flex-col w-full order-1 lg:order-2">
-            <div className="w-full flex items-center justify-center bg-blue-100 rounded-xl overflow-hidden shadow-inner max-h-[160px] md:max-h-none">
+            <div className="w-full flex items-center justify-center bg-blue-200 rounded-xl overflow-hidden shadow-inner max-h-[160px] md:max-h-none">
               <LiveMap activeCountries={liveBreakdown.map(i => i.country)} />
             </div>
             <div className="mt-2 flex justify-center lg:justify-start">

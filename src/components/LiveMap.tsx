@@ -15,7 +15,7 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setPulse((p) => !p);
-    }, 1500);
+    }, 800);
     return () => clearInterval(interval);
   }, []);
 
@@ -53,7 +53,7 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                   stroke={isMatch ? activeStroke : "#0B2B5A"}
                   strokeWidth={isMatch ? activeStrokeWidth : 0.5}
                   style={{
-                    default: { outline: "none", transition: "all 1.5s ease-in-out" },
+                    default: { outline: "none", transition: "all 0.8s ease-in-out" },
                     hover: { fill: isMatch ? activeFill : "#2a4d7d", outline: "none", transition: "all 250ms" },
                     pressed: { outline: "none" },
                   }}
