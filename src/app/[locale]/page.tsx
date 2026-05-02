@@ -12,7 +12,7 @@ export default function Home() {
         <h1 className="text-3xl md:text-5xl font-black text-primary-deepBlue mb-1 md:mb-2 leading-tight tracking-tight">
           {t('title')}
         </h1>
-        <p className="text-sm md:text-xl text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm md:text-xl text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-2xl mx-auto font-bold">
           {t('description')}
         </p>
       </div>

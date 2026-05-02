@@ -163,7 +163,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         </motion.button>
       </div>
       <p className="mt-0 md:mt-4 text-3xl md:text-4xl font-black text-primary-deepBlue text-center max-w-[400px] leading-[1.1] tracking-tight">
-        {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to add your light to the global map."}
+        {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to light up your country on the live map."}
       </p>
       
       {!isActive && (
