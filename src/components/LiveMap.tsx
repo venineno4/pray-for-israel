@@ -24,18 +24,18 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
         @keyframes activeCountryPulse {
           0%, 100% {
             fill: #FFE066 !important;
-            filter: drop-shadow(0 0 6px rgba(255, 224, 102, 0.8));
+            stroke: #FFE066 !important;
+            stroke-width: 0.8px !important;
           }
           50% {
             fill: #FFFFFF !important;
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 1));
+            stroke: #FFFFFF !important;
+            stroke-width: 1.5px !important;
           }
         }
         .country-active {
           animation: activeCountryPulse 3s ease-in-out infinite !important;
           outline: none !important;
-          stroke: #FFE066 !important;
-          stroke-width: 0.8px !important;
         }
         .country-inactive {
           fill: #1e3a5f !important;
