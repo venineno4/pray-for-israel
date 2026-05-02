@@ -168,7 +168,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
       
       {!isActive && (
         <p className="mt-1 md:mt-2 text-[10px] md:text-[11px] leading-tight text-text-dark opacity-50 text-center max-w-[280px]">
-          Pray silently in your own words, wherever you are. This is a live tracker, not an audio/video room.
+          This is a live tracker, not an audio/video room.
         </p>
       )}
 
