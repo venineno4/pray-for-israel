@@ -14,7 +14,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   const description = "Join the global live prayer for Israel from your country. See who is praying worldwide right now!";
   const url = "https://prayforisrael.live";
   // Absolute URL required — WhatsApp & Facebook crawlers do NOT follow relative paths
-  const ogImage = "https://prayforisrael.live/og-image.png";
+  const ogImage = "https://prayforisrael.live/og-image.jpg";
   const ogImageWidth = 1024;
   const ogImageHeight = 1024;
 
