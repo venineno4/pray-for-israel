@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { supabase } from "@/utils/supabaseClient";
 import { getFlagForCountry, COUNTRIES } from "@/utils/countries";
-import LiveMap from "./LiveMap";
+import dynamic from "next/dynamic";
+const LiveMap = dynamic(() => import("./LiveMap"), { ssr: false, loading: () => <div className="w-full h-full flex items-center justify-center text-gray-400">Loading map...</div> });
 import NotificationReminder from "./NotificationReminder";
 
 type TimeRange = 1 | 24 | 720 | 8760;
