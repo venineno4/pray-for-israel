@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import CountryModal from "./CountryModal";
 import { supabase } from "@/utils/supabaseClient";
 
-export default function PulsePrayerButton({ label = "I am Praying Now" }: { label?: string }) {
+export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: string }) {
   const [isActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sessionId, setSessionId] = useState("");
