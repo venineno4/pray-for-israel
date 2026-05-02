@@ -35,15 +35,21 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
         height={500}
         style={{ width: "100%", height: "auto" }}
       >
+        <defs>
+          <filter id="yellowGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="#FFF000" floodOpacity="1" />
+            <feDropShadow dx="0" dy="0" stdDeviation="10" floodColor="#FFB300" floodOpacity="0.8" />
+          </filter>
+        </defs>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map((geo) => {
               const geoName = geo.properties.name;
               const isMatch = isCountryActive(geoName);
               
-              const activeFill = pulse ? "#FFFFFF" : "#FFE066";
-              const activeStroke = pulse ? "#FFFFFF" : "#FFE066";
-              const activeStrokeWidth = pulse ? 1.5 : 0.8;
+              const activeFill = pulse ? "#FFFFFF" : "#FFF59D";
+              const activeStroke = pulse ? "#FFFFFF" : "#FFEA00";
+              const activeStrokeWidth = pulse ? 2 : 1;
               
               return (
                 <Geography
@@ -52,8 +58,9 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                   fill={isMatch ? activeFill : "#1e3a5f"}
                   stroke={isMatch ? activeStroke : "#0B2B5A"}
                   strokeWidth={isMatch ? activeStrokeWidth : 0.5}
+                  filter={isMatch ? "url(#yellowGlow)" : "none"}
                   style={{
-                    default: { outline: "none", transition: "all 0.8s ease-in-out" },
+                    default: { outline: "none", filter: isMatch ? "url(#yellowGlow)" : "none", transition: "all 0.8s ease-in-out" },
                     hover: { fill: isMatch ? activeFill : "#2a4d7d", outline: "none", transition: "all 250ms" },
                     pressed: { outline: "none" },
                   }}
