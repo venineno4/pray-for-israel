@@ -6,9 +6,9 @@ export default function Home() {
   const t = useTranslations('Index');
   
   return (
-    <main className="min-h-screen flex flex-col items-center py-3 md:py-6 px-3 md:px-4 bg-primary-white">
+    <main className="min-h-screen flex flex-col items-center py-1 md:py-6 px-3 md:px-4 bg-primary-white">
       {/* Header Section */}
-      <div className="text-center max-w-4xl mb-3 md:mb-6 mt-1 md:mt-4">
+      <div className="text-center max-w-4xl mb-1 md:mb-6 mt-0 md:mt-4">
         <h1 className="text-3xl md:text-5xl font-black text-primary-deepBlue mb-1 md:mb-2 leading-tight tracking-tight">
           {t('title')}
         </h1>
@@ -18,9 +18,9 @@ export default function Home() {
       </div>
 
       {/* Desktop Grid Wrapper */}
-      <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-1 md:mt-4">
+      <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-0 md:mt-4">
         {/* Main Interactive Button - Left Column */}
-        <div className="mb-2 lg:mb-0 flex justify-center lg:sticky lg:top-8">
+        <div className="mb-0 lg:mb-0 flex justify-center lg:sticky lg:top-8">
           <PulsePrayerButton label={t('ctaButton')} />
         </div>
 

@@ -114,7 +114,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-2 md:py-8">
+    <div className="flex flex-col items-center justify-center pt-1 pb-0 md:py-8">
       <div className="relative flex items-center justify-center w-full min-h-[160px] md:min-h-[280px]">
         {/* Outer Ripple / Pulse Effect */}
         {isActive && (
