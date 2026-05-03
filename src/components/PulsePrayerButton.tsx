@@ -52,16 +52,6 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
 
   const handleButtonClick = async () => {
     if (!isActive) {
-      // Fire GA4 event safely — never blocks UI
-      try {
-        sendGAEvent('event', 'pray_button_clicked', { method: 'click' });
-      } catch (_) {}
-      // Fire Meta Pixel custom event safely
-      try {
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-          (window as any).fbq('trackCustom', 'PrayButtonClicked');
-        }
-      } catch (_) {}
       // Start praying -> Open Modal
       setIsModalOpen(true);
     } else {
@@ -84,6 +74,16 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
           country: country,
           is_active: true,
         }]);
+        
+      // Fire accurate GA4 & Meta events now that the user actually started praying
+      try {
+        sendGAEvent('event', 'prayer_successfully_started', { country: country });
+      } catch (_) {}
+      try {
+        if (typeof window !== 'undefined' && (window as any).fbq) {
+          (window as any).fbq('trackCustom', 'PrayerStarted', { selected_country: country });
+        }
+      } catch (_) {}
         
       // Set 5-minute timeout (300,000 ms) to automatically toggle off
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -162,9 +162,22 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
           {renderLabel()}
         </motion.button>
       </div>
-      <p className="mt-0 md:mt-4 text-3xl md:text-4xl font-black text-primary-deepBlue text-center max-w-[400px] leading-[1.1] tracking-tight">
-        {isActive ? "You are joined with believers worldwide. (Auto-close in 5m)" : "Tap to light up your country on the map."}
-      </p>
+      <div className="flex flex-col items-center mt-0 md:mt-4 text-center max-w-[400px]">
+        {isActive ? (
+          <>
+            <p className="text-3xl md:text-4xl font-black text-primary-deepBlue leading-[1.1] tracking-tight">
+              You are joined with believers worldwide.
+            </p>
+            <p className="mt-2 text-sm md:text-base font-medium text-gray-500 opacity-80">
+              (Auto-close in 5m)
+            </p>
+          </>
+        ) : (
+          <p className="text-3xl md:text-4xl font-black text-primary-deepBlue leading-[1.1] tracking-tight">
+            Tap to light up your country on the map.
+          </p>
+        )}
+      </div>
       
       {!isActive && (
         <p className="mt-1 md:mt-2 text-[10px] md:text-[11px] leading-tight text-text-dark opacity-50 text-center max-w-[280px]">
