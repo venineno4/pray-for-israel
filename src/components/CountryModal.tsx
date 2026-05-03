@@ -50,7 +50,11 @@ export default function CountryModal({ isOpen, onClose, onSelect }: CountryModal
             </div>
             
             <div className="max-h-[400px] overflow-y-auto p-2">
-              {filteredCountries.length > 0 ? (
+              {searchTerm.length === 0 ? (
+                <div className="p-8 text-center text-gray-400 italic text-sm">
+                  Type your country name above...
+                </div>
+              ) : filteredCountries.length > 0 ? (
                 <ul className="space-y-1">
                   {filteredCountries.map(country => (
                     <li key={country.name}>
