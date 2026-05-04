@@ -17,15 +17,15 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Desktop Grid Wrapper / Mobile Flex Wrapper */}
-      <div className="w-full max-w-6xl mx-auto flex flex-col lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-0 md:mt-4">
-        {/* Main Interactive Button - Left Column Desktop, Bottom Mobile */}
-        <div className="order-2 lg:order-1 mb-4 lg:mb-0 flex justify-center lg:sticky lg:top-8 mt-4 lg:mt-0">
+      {/* Desktop Grid Wrapper */}
+      <div className="w-full max-w-6xl mx-auto lg:grid lg:grid-cols-[1fr_2fr] lg:gap-8 lg:items-start mt-0 md:mt-4">
+        {/* Main Interactive Button - Left Column */}
+        <div className="mb-4 lg:mb-0 flex justify-center lg:sticky lg:top-8 mt-4 lg:mt-0">
           <PulsePrayerButton label={t('ctaButton')} />
         </div>
 
-        {/* Live Dashboard Section - Right Column Desktop, Top Mobile */}
-        <div className="order-1 lg:order-2 w-full">
+        {/* Live Dashboard Section - Right Column */}
+        <div className="w-full">
           <LiveDashboard count={1245} />
         </div>
       </div>
