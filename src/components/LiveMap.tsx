@@ -31,9 +31,9 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <ComposableMap
-        projectionConfig={{ scale: 150, center: [10, 0] }}
+        projectionConfig={{ scale: 220, center: [10, 0] }}
         width={800}
-        height={500}
+        height={700}
         style={{ width: "100%", height: "auto" }}
       >
         <defs>

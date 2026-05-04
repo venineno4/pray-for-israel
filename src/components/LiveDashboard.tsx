@@ -233,7 +233,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
             </div>
             
             {/* Country Filter inline */}
-            <div className="mt-4 w-full">
+            <div className="hidden md:block mt-4 w-full">
               <select 
                 className="block w-full pl-3 pr-8 py-1.5 text-sm border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-gold focus:border-primary-gold rounded-lg bg-gray-50 border shadow-sm transition-colors"
                 value={selectedCountry}

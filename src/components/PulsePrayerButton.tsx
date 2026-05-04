@@ -98,19 +98,19 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
   };
 
   const renderLabel = () => {
-    if (isActive) return <span className="text-base md:text-xl tracking-wider">Praying...</span>;
+    if (isActive) return <span className="text-sm md:text-xl tracking-wider">Praying...</span>;
     
     if (label.includes("&")) {
       const parts = label.split("&");
       return (
         <div className="flex flex-col items-center justify-center leading-none">
-          <span className="text-xl md:text-3xl font-black uppercase tracking-wider">{parts[0].trim()}</span>
-          <span className="text-lg md:text-2xl font-serif italic opacity-80 my-0.5 md:my-1">&amp;</span>
-          <span className="text-xl md:text-3xl font-black uppercase tracking-wider">{parts[1].trim()}</span>
+          <span className="text-base md:text-2xl font-black uppercase tracking-wider">{parts[0].trim()}</span>
+          <span className="text-sm md:text-xl font-serif italic opacity-80 my-0.5 md:my-1">&amp;</span>
+          <span className="text-base md:text-2xl font-black uppercase tracking-wider">{parts[1].trim()}</span>
         </div>
       );
     }
-    return <span className="text-base md:text-xl font-bold">{label}</span>;
+    return <span className="text-sm md:text-xl font-bold">{label}</span>;
   };
 
   return (
@@ -165,15 +165,15 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
       <div className="flex flex-col items-center mt-0 md:mt-4 text-center max-w-[400px]">
         {isActive ? (
           <>
-            <p className="text-3xl md:text-4xl font-black text-primary-deepBlue leading-[1.1] tracking-tight">
+            <p className="text-lg md:text-2xl font-bold text-primary-deepBlue leading-[1.2] tracking-tight">
               You are joined with believers worldwide.
             </p>
-            <p className="mt-2 text-sm md:text-base font-medium text-gray-500 opacity-80">
+            <p className="mt-1 md:mt-2 text-sm md:text-base font-medium text-gray-500 opacity-80">
               (Auto-close in 5m)
             </p>
           </>
         ) : (
-          <p className="text-3xl md:text-4xl font-black text-primary-deepBlue leading-[1.1] tracking-tight">
+          <p className="text-lg md:text-2xl font-bold text-primary-deepBlue leading-[1.2] tracking-tight">
             Tap to light up your country on the map.
           </p>
         )}
