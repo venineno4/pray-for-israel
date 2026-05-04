@@ -29,6 +29,13 @@ export default function Home() {
           <LiveDashboard count={1245} />
         </div>
       </div>
+
+      {/* Footer Section */}
+      <footer className="w-full text-center mt-12 md:mt-16 pb-4">
+        <p className="text-sm text-gray-500">
+          Sponsored by <a href="https://allisraelnews.com" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-gray-800 hover:underline transition-colors">All Israel News</a>
+        </p>
+      </footer>
     </main>
   );
 }

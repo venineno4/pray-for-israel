@@ -6,7 +6,7 @@ import { supabase } from "@/utils/supabaseClient";
 import { getFlagForCountry, COUNTRIES } from "@/utils/countries";
 import dynamic from "next/dynamic";
 const LiveMap = dynamic(() => import("./LiveMap"), { ssr: false, loading: () => <div className="w-full h-full flex items-center justify-center text-gray-400">Loading map...</div> });
-import NotificationReminder from "./NotificationReminder";
+// import NotificationReminder from "./NotificationReminder";
 
 type TimeRange = 1 | 24 | 720 | 8760;
 type MetricType = "total" | "unique";
@@ -250,9 +250,11 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
             <div className="w-full flex items-center justify-center bg-blue-200 rounded-xl overflow-hidden shadow-inner max-h-[160px] md:max-h-none">
               <LiveMap activeCountries={liveBreakdown.map(i => i.country)} />
             </div>
+            {/* 
             <div className="mt-2 flex justify-center lg:justify-start">
               <NotificationReminder />
             </div>
+            */}
           </div>
         </div>
 
