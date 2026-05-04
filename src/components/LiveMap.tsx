@@ -31,10 +31,11 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <ComposableMap
-        projectionConfig={{ scale: 220, center: [10, 0] }}
+        projectionConfig={{ scale: 150, center: [10, 0] }}
         width={800}
-        height={700}
+        height={500}
         style={{ width: "100%", height: "auto" }}
+        preserveAspectRatio="xMidYMid meet"
       >
         <defs>
           <filter id="yellowGlow" x="-50%" y="-50%" width="200%" height="200%">
