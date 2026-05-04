@@ -81,7 +81,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
       } catch (_) {}
       try {
         if (typeof window !== 'undefined' && (window as any).fbq) {
-          (window as any).fbq('trackCustom', 'PrayerStarted', { selected_country: country });
+          (window as any).fbq('track', 'Subscribe', { content_category: 'Prayer', content_name: country });
         }
       } catch (_) {}
         
