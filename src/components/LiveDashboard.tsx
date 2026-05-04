@@ -258,10 +258,10 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
           </div>
         </div>
 
-        <div className="hidden md:block w-full h-px bg-gray-100"></div>
+        <div className="w-full h-px bg-gray-100 mt-4 md:mt-0"></div>
 
-        {/* Bottom Half: Historical Stats (Desktop Only) */}
-        <div className="hidden md:flex flex-col bg-gray-50/50 p-3 md:p-5">
+        {/* Bottom Half: Historical Stats */}
+        <div className="flex flex-col bg-gray-50/50 p-3 md:p-5">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 md:gap-3 mb-3 md:mb-4">
             <h3 className="text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider">Historical Analytics</h3>
             <div className="flex space-x-2">
