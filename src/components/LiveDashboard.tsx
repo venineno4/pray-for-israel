@@ -208,7 +208,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
         {/* Top Half: Live Stats & Map */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 p-2 md:p-5">
           {/* Live Counter & Badges */}
-          <div className="flex flex-col items-center lg:items-start justify-center mb-0 md:mb-0 order-2 lg:order-1 mt-2 lg:mt-0">
+          <div className="flex flex-col items-center lg:items-start justify-center mb-0 md:mb-0 order-1 lg:order-1 mt-2 lg:mt-0">
             <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest font-semibold mb-1">Currently Praying</p>
             <motion.div 
               key={activeCount}
@@ -245,9 +245,9 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
             </div>
           </div>
 
-          {/* Mini Live Map */}
-          <div className="flex flex-col w-full order-1 lg:order-2">
-            <div className="w-full flex items-center justify-center bg-blue-200 rounded-xl overflow-hidden shadow-inner max-h-[160px] md:max-h-none">
+          {/* Main Live Map */}
+          <div className="flex flex-col w-full order-2 lg:order-2 mt-4 lg:mt-0">
+            <div className="w-full flex items-center justify-center bg-blue-200 rounded-xl overflow-hidden shadow-inner min-h-[300px] md:min-h-[500px]">
               <LiveMap activeCountries={liveBreakdown.map(i => i.country)} />
             </div>
             {/* 
@@ -258,81 +258,6 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
           </div>
         </div>
 
-        <div className="w-full h-px bg-gray-100"></div>
-
-        {/* Bottom Half: Historical Stats */}
-        <div className="flex flex-col bg-gray-50/50 p-3 md:p-5">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 md:gap-3 mb-3 md:mb-4">
-            <h3 className="text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider">Historical Analytics</h3>
-            <div className="flex space-x-2">
-              <select 
-                className="pl-2 pr-7 py-1 text-xs border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-gold rounded-md shadow-sm bg-white"
-                value={timeRange}
-                onChange={(e) => setTimeRange(Number(e.target.value) as TimeRange)}
-              >
-                <option value={1}>1 Hour</option>
-                <option value={24}>24 Hours</option>
-                <option value={720}>30 Days</option>
-                <option value={8760}>1 Year</option>
-              </select>
-              
-              <div className="flex bg-gray-200 p-0.5 rounded-md">
-                <button 
-                  onClick={() => setMetricType("unique")}
-                  className={`px-2.5 py-0.5 text-xs rounded transition-colors ${metricType === 'unique' ? 'bg-white shadow text-primary-deepBlue font-medium' : 'text-gray-500 hover:text-gray-700'}`}
-                >
-                  Unique
-                </button>
-                <button 
-                  onClick={() => setMetricType("total")}
-                  className={`px-2.5 py-0.5 text-xs rounded transition-colors ${metricType === 'total' ? 'bg-white shadow text-primary-deepBlue font-medium' : 'text-gray-500 hover:text-gray-700'}`}
-                >
-                  Total
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col lg:flex-row gap-6 items-start">
-            <div className="flex flex-col items-center lg:items-start w-full lg:w-1/3">
-              <p className="text-gray-400 text-[10px] uppercase tracking-widest font-bold mb-1">
-                {metricType === 'unique' ? 'Unique Intercessors' : 'Total Sessions'}
-              </p>
-              <div className="text-4xl font-black text-primary-gold">
-                {isLoadingHistory ? "..." : totalHistorical.toLocaleString()}
-              </div>
-            </div>
-
-            <div className="w-full lg:w-2/3">
-              <ul className="space-y-1 md:space-y-2 max-h-[250px] md:max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                {isLoadingHistory ? (
-                  <div className="text-center text-gray-400 text-xs py-4">Loading data...</div>
-                ) : countryStats.length > 0 ? (
-                  countryStats.map((stat, idx) => (
-                    <li key={stat.country} className="flex justify-between items-center text-gray-700 bg-white px-2 py-1 md:px-3 md:py-1.5 rounded border border-gray-100 shadow-sm">
-                      <div className="flex items-center space-x-2 min-w-0">
-                        <span className="text-gray-400 text-xs w-4 shrink-0">{idx + 1}.</span>
-                        <span className="text-base leading-none shrink-0">{getFlagForCountry(stat.country)}</span>
-                        <span className="font-medium text-sm truncate">{stat.country}</span>
-                      </div>
-                      <div className="flex items-center gap-2 shrink-0 ml-2">
-                        <span className="text-[10px] text-gray-400 font-medium">
-                          <span className="text-primary-deepBlue font-bold">{stat.unique_prayers.toLocaleString()}</span> unique
-                        </span>
-                        <span className="text-gray-200">|</span>
-                        <span className="text-[10px] text-gray-400 font-medium">
-                          <span className="text-primary-gold font-bold">{stat.total_prayers.toLocaleString()}</span> total
-                        </span>
-                      </div>
-                    </li>
-                  ))
-                ) : (
-                  <div className="text-center text-gray-400 text-xs py-4">No data for this period.</div>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

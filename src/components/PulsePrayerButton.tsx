@@ -98,28 +98,28 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
   };
 
   const renderLabel = () => {
-    if (isActive) return <span className="text-lg md:text-2xl tracking-wider">Praying...</span>;
+    if (isActive) return <span className="text-base md:text-xl tracking-wider">Praying...</span>;
     
     if (label.includes("&")) {
       const parts = label.split("&");
       return (
         <div className="flex flex-col items-center justify-center leading-none">
-          <span className="text-2xl md:text-4xl font-black uppercase tracking-wider">{parts[0].trim()}</span>
-          <span className="text-xl md:text-3xl font-serif italic opacity-80 my-0.5 md:my-1">&amp;</span>
-          <span className="text-2xl md:text-4xl font-black uppercase tracking-wider">{parts[1].trim()}</span>
+          <span className="text-xl md:text-3xl font-black uppercase tracking-wider">{parts[0].trim()}</span>
+          <span className="text-lg md:text-2xl font-serif italic opacity-80 my-0.5 md:my-1">&amp;</span>
+          <span className="text-xl md:text-3xl font-black uppercase tracking-wider">{parts[1].trim()}</span>
         </div>
       );
     }
-    return <span className="text-lg md:text-2xl font-bold">{label}</span>;
+    return <span className="text-base md:text-xl font-bold">{label}</span>;
   };
 
   return (
     <div className="flex flex-col items-center justify-center pt-1 pb-0 md:py-8">
-      <div className="relative flex items-center justify-center w-full min-h-[160px] md:min-h-[280px]">
+      <div className="relative flex items-center justify-center w-full min-h-[120px] md:min-h-[200px]">
         {/* Outer Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none w-36 h-36 md:w-56 md:h-56"
+            className="absolute rounded-full bg-primary-gold opacity-20 pointer-events-none w-24 h-24 md:w-40 md:h-40"
             initial={{ scale: 1, opacity: 0.5 }}
             animate={{ scale: 2.2, opacity: 0 }}
             transition={{
@@ -133,7 +133,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         {/* Second Ripple / Pulse Effect */}
         {isActive && (
           <motion.div
-            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none w-36 h-36 md:w-56 md:h-56"
+            className="absolute rounded-full bg-primary-deepBlue opacity-10 pointer-events-none w-24 h-24 md:w-40 md:h-40"
             initial={{ scale: 1, opacity: 0.5 }}
             animate={{ scale: 1.6, opacity: 0 }}
             transition={{
@@ -151,7 +151,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className={`
-            relative z-10 flex items-center justify-center w-36 h-36 md:w-56 md:h-56 rounded-full 
+            relative z-10 flex items-center justify-center w-24 h-24 md:w-40 md:h-40 rounded-full 
             shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-colors duration-500
             ${isActive 
               ? 'bg-primary-deepBlue text-primary-white border-4 border-primary-gold' 
