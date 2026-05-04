@@ -188,7 +188,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="w-full bg-primary-white rounded-2xl shadow-xl border border-gray-100 flex flex-col overflow-hidden"
+      className="w-full bg-primary-white rounded-none md:rounded-2xl shadow-none md:shadow-xl border-y md:border border-gray-100 flex flex-col overflow-hidden"
     >
       {/* Unified Header */}
       <div className="hidden md:flex bg-primary-deepBlue px-3 md:px-5 py-2 md:py-3 justify-between items-center border-b-4 border-primary-gold">
@@ -206,9 +206,9 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
       <div className="flex flex-col">
         {/* Top Half: Live Stats & Map */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-4 p-2 md:p-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-4 p-0 md:p-5">
           {/* Live Counter & Badges */}
-          <div className="flex flex-col items-center lg:items-start justify-center mb-0 md:mb-0 order-1 lg:order-1 mt-2 lg:mt-0">
+          <div className="flex flex-col items-center lg:items-start justify-center mb-0 md:mb-0 order-2 lg:order-1 mt-4 md:mt-0 px-4 py-2 md:p-0">
             <p className="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest font-semibold mb-1">Currently Praying</p>
             <motion.div 
               key={activeCount}
@@ -246,8 +246,8 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
           </div>
 
           {/* Main Live Map */}
-          <div className="flex flex-col w-full order-2 lg:order-2">
-            <div className="w-full flex items-center justify-center bg-blue-200 rounded-xl overflow-hidden shadow-inner">
+          <div className="flex flex-col w-full order-1 lg:order-2">
+            <div className="w-full flex items-center justify-center bg-blue-200 rounded-none md:rounded-xl overflow-hidden shadow-none md:shadow-inner">
               <LiveMap activeCountries={liveBreakdown.map(i => i.country)} />
             </div>
             {/* 
