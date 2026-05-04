@@ -85,7 +85,7 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                 
                 return (
                   <Marker key={`marker-${geo.rsmKey}`} coordinates={centroid}>
-                    <circle r={25} fill="url(#pinprickGlow)" />
+                    <circle r={12.5} fill="url(#pinprickGlow)" />
                     <circle r={5} fill="#FFFFFF" />
                   </Marker>
                 );
