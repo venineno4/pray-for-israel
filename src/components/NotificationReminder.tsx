@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { sendGAEvent } from "@next/third-parties/google";
 
@@ -12,7 +11,6 @@ declare global {
 }
 
 export default function NotificationReminder() {
-  const t = useTranslations('Index');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -101,11 +99,11 @@ export default function NotificationReminder() {
           )}
         </div>
         <span className="text-xs md:text-sm font-medium text-text-dark opacity-70 group-hover:opacity-100 transition-opacity">
-          {t('remindMeDaily')}
+          Remind me daily to pray for Israel
         </span>
       </motion.div>
       <p className="text-[10px] md:text-[11px] italic text-text-dark opacity-40 leading-tight max-w-[280px]">
-        {t('motto')}
+        “They bring to you pure oil of pressed olives for the light, to make the lamps burn continually.” (Leviticus 24:2–3)
       </p>
     </div>
   );
