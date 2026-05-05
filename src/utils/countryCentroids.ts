@@ -3,7 +3,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     1.601554,
     42.546245
   ],
-  "\"United Arab Emirates\"": [
+  "United Arab Emirates": [
     53.847818,
     23.424076
   ],
@@ -11,7 +11,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     67.709953,
     33.93911
   ],
-  "\"Antigua and Barbuda\"": [
+  "Antigua and Barbuda": [
     -61.796428,
     17.060816
   ],
@@ -27,7 +27,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     45.038189,
     40.069099
   ],
-  "\"Netherlands Antilles\"": [
+  "Netherlands Antilles": [
     -69.060087,
     12.226079
   ],
@@ -43,7 +43,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -63.616672,
     -38.416097
   ],
-  "\"American Samoa\"": [
+  "American Samoa": [
     -170.132217,
     -14.270972
   ],
@@ -63,7 +63,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     47.576927,
     40.143105
   ],
-  "\"Bosnia and Herzegovina\"": [
+  "Bosnia and Herzegovina": [
     17.679076,
     43.915886
   ],
@@ -79,7 +79,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     4.469936,
     50.503887
   ],
-  "\"Burkina Faso\"": [
+  "Burkina Faso": [
     -1.561593,
     12.238333
   ],
@@ -123,7 +123,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     90.433601,
     27.514162
   ],
-  "\"Bouvet Island\"": [
+  "Bouvet Island": [
     3.413194,
     -54.423199
   ],
@@ -143,19 +143,19 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -106.346771,
     56.130366
   ],
-  "\"Cocos [Keeling] Islands\"": [
+  "Cocos [Keeling] Islands": [
     96.870956,
     -12.164165
   ],
-  "\"Congo [DRC]\"": [
+  "Congo [DRC]": [
     21.758664,
     -4.038333
   ],
-  "\"Central African Republic\"": [
+  "Central African Republic": [
     20.939444,
     6.611111
   ],
-  "\"Congo [Republic]\"": [
+  "Congo [Republic]": [
     15.827659,
     -0.228021
   ],
@@ -163,11 +163,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     8.227512,
     46.818188
   ],
-  "\"Côte d'Ivoire\"": [
+  "Côte d'Ivoire": [
     -5.54708,
     7.539989
   ],
-  "\"Cook Islands\"": [
+  "Cook Islands": [
     -159.777671,
     -21.236736
   ],
@@ -187,7 +187,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -74.297333,
     4.570868
   ],
-  "\"Costa Rica\"": [
+  "Costa Rica": [
     -83.753428,
     9.748917
   ],
@@ -195,11 +195,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -77.781167,
     21.521757
   ],
-  "\"Cape Verde\"": [
+  "Cape Verde": [
     -24.013197,
     16.002082
   ],
-  "\"Christmas Island\"": [
+  "Christmas Island": [
     105.690449,
     -10.447525
   ],
@@ -207,7 +207,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     33.429859,
     35.126413
   ],
-  "\"Czech Republic\"": [
+  "Czech Republic": [
     15.472962,
     49.817492
   ],
@@ -227,7 +227,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -61.370976,
     15.414999
   ],
-  "\"Dominican Republic\"": [
+  "Dominican Republic": [
     -70.162651,
     18.735693
   ],
@@ -247,7 +247,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     30.802498,
     26.820553
   ],
-  "\"Western Sahara\"": [
+  "Western Sahara": [
     -12.885834,
     24.215527
   ],
@@ -271,7 +271,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     179.414413,
     -16.578193
   ],
-  "\"Falkland Islands [Islas Malvinas]\"": [
+  "Falkland Islands [Islas Malvinas]": [
     -59.523613,
     -51.796253
   ],
@@ -279,7 +279,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     150.550812,
     7.425554
   ],
-  "\"Faroe Islands\"": [
+  "Faroe Islands": [
     -6.911806,
     61.892635
   ],
@@ -291,7 +291,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     11.609444,
     -0.803689
   ],
-  "\"United Kingdom\"": [
+  "United Kingdom": [
     -3.435973,
     55.378051
   ],
@@ -303,7 +303,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     43.356892,
     42.315407
   ],
-  "\"French Guiana\"": [
+  "French Guiana": [
     -53.125782,
     3.933889
   ],
@@ -335,7 +335,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -62.067641,
     16.995971
   ],
-  "\"Equatorial Guinea\"": [
+  "Equatorial Guinea": [
     10.267895,
     1.650801
   ],
@@ -343,7 +343,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     21.824312,
     39.074208
   ],
-  "\"South Georgia and the South Sandwich Islands\"": [
+  "South Georgia and the South Sandwich Islands": [
     -36.587909,
     -54.429579
   ],
@@ -363,15 +363,15 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -58.93018,
     4.860416
   ],
-  "\"Gaza Strip\"": [
+  "Gaza Strip": [
     34.308825,
     31.354676
   ],
-  "\"Hong Kong\"": [
+  "Hong Kong": [
     114.109497,
     22.396428
   ],
-  "\"Heard Island and McDonald Islands\"": [
+  "Heard Island and McDonald Islands": [
     73.504158,
     -53.08181
   ],
@@ -403,7 +403,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     34.851612,
     31.046051
   ],
-  "\"Isle of Man\"": [
+  "Isle of Man": [
     -4.548056,
     54.236107
   ],
@@ -411,7 +411,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     78.96288,
     20.593684
   ],
-  "\"British Indian Ocean Territory\"": [
+  "British Indian Ocean Territory": [
     71.876519,
     -6.343194
   ],
@@ -467,15 +467,15 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     43.872219,
     -11.875001
   ],
-  "\"Saint Kitts and Nevis\"": [
+  "Saint Kitts and Nevis": [
     -62.782998,
     17.357822
   ],
-  "\"North Korea\"": [
+  "North Korea": [
     127.510093,
     40.339852
   ],
-  "\"South Korea\"": [
+  "South Korea": [
     127.766922,
     35.907757
   ],
@@ -483,7 +483,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     47.481766,
     29.31166
   ],
-  "\"Cayman Islands\"": [
+  "Cayman Islands": [
     -80.566956,
     19.513469
   ],
@@ -499,7 +499,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     35.862285,
     33.854721
   ],
-  "\"Saint Lucia\"": [
+  "Saint Lucia": [
     -60.978893,
     13.909444
   ],
@@ -507,7 +507,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     9.555373,
     47.166
   ],
-  "\"Sri Lanka\"": [
+  "Sri Lanka": [
     80.771797,
     7.873054
   ],
@@ -555,11 +555,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     46.869107,
     -18.766947
   ],
-  "\"Marshall Islands\"": [
+  "Marshall Islands": [
     171.184478,
     7.131474
   ],
-  "\"Macedonia [FYROM]\"": [
+  "Macedonia [FYROM]": [
     21.745275,
     41.608635
   ],
@@ -567,7 +567,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -3.996166,
     17.570692
   ],
-  "\"Myanmar [Burma]\"": [
+  "Myanmar [Burma]": [
     95.956223,
     21.913965
   ],
@@ -579,7 +579,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     113.543873,
     22.198745
   ],
-  "\"Northern Mariana Islands\"": [
+  "Northern Mariana Islands": [
     145.38469,
     17.33083
   ],
@@ -627,7 +627,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     18.49041,
     -22.95764
   ],
-  "\"New Caledonia\"": [
+  "New Caledonia": [
     165.618042,
     -20.904305
   ],
@@ -635,7 +635,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     8.081666,
     17.607789
   ],
-  "\"Norfolk Island\"": [
+  "Norfolk Island": [
     167.954712,
     -29.040835
   ],
@@ -667,7 +667,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -169.867233,
     -19.054445
   ],
-  "\"New Zealand\"": [
+  "New Zealand": [
     174.885971,
     -40.900557
   ],
@@ -683,11 +683,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -75.015152,
     -9.189967
   ],
-  "\"French Polynesia\"": [
+  "French Polynesia": [
     -149.406843,
     -17.679742
   ],
-  "\"Papua New Guinea\"": [
+  "Papua New Guinea": [
     143.95555,
     -6.314993
   ],
@@ -703,19 +703,19 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     19.145136,
     51.919438
   ],
-  "\"Saint Pierre and Miquelon\"": [
+  "Saint Pierre and Miquelon": [
     -56.27111,
     46.941936
   ],
-  "\"Pitcairn Islands\"": [
+  "Pitcairn Islands": [
     -127.439308,
     -24.703615
   ],
-  "\"Puerto Rico\"": [
+  "Puerto Rico": [
     -66.590149,
     18.220833
   ],
-  "\"Palestinian Territories\"": [
+  "Palestinian Territories": [
     35.233154,
     31.952162
   ],
@@ -755,11 +755,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     29.873888,
     -1.940278
   ],
-  "\"Saudi Arabia\"": [
+  "Saudi Arabia": [
     45.079162,
     23.885942
   ],
-  "\"Solomon Islands\"": [
+  "Solomon Islands": [
     160.156194,
     -9.64571
   ],
@@ -779,7 +779,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     103.819836,
     1.352083
   ],
-  "\"Saint Helena\"": [
+  "Saint Helena": [
     -10.030696,
     -24.143474
   ],
@@ -787,7 +787,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     14.995463,
     46.151241
   ],
-  "\"Svalbard and Jan Mayen\"": [
+  "Svalbard and Jan Mayen": [
     23.670272,
     77.553604
   ],
@@ -795,11 +795,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     19.699024,
     48.669026
   ],
-  "\"Sierra Leone\"": [
+  "Sierra Leone": [
     -11.779889,
     8.460555
   ],
-  "\"San Marino\"": [
+  "San Marino": [
     12.457777,
     43.94236
   ],
@@ -815,11 +815,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -56.027783,
     3.919305
   ],
-  "\"São Tomé and Príncipe\"": [
+  "São Tomé and Príncipe": [
     6.613081,
     0.18636
   ],
-  "\"El Salvador\"": [
+  "El Salvador": [
     -88.89653,
     13.794185
   ],
@@ -831,7 +831,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     31.465866,
     -26.522503
   ],
-  "\"Turks and Caicos Islands\"": [
+  "Turks and Caicos Islands": [
     -71.797928,
     21.694025
   ],
@@ -839,7 +839,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     18.732207,
     15.454166
   ],
-  "\"French Southern Territories\"": [
+  "French Southern Territories": [
     69.348557,
     -49.280366
   ],
@@ -879,7 +879,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     35.243322,
     38.963745
   ],
-  "\"Trinidad and Tobago\"": [
+  "Trinidad and Tobago": [
     -61.222503,
     10.691803
   ],
@@ -903,7 +903,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     32.290275,
     1.373333
   ],
-  "\"United States\"": [
+  "United States": [
     -95.712891,
     37.09024
   ],
@@ -915,11 +915,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     64.585262,
     41.377491
   ],
-  "\"Vatican City\"": [
+  "Vatican City": [
     12.453389,
     41.902916
   ],
-  "\"Saint Vincent and the Grenadines\"": [
+  "Saint Vincent and the Grenadines": [
     -61.287228,
     12.984305
   ],
@@ -927,11 +927,11 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     -66.58973,
     6.42375
   ],
-  "\"British Virgin Islands\"": [
+  "British Virgin Islands": [
     -64.639968,
     18.420695
   ],
-  "\"U.S. Virgin Islands\"": [
+  "U.S. Virgin Islands": [
     -64.896335,
     18.335765
   ],
@@ -943,7 +943,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     166.959158,
     -15.376706
   ],
-  "\"Wallis and Futuna\"": [
+  "Wallis and Futuna": [
     -177.156097,
     -13.768752
   ],
@@ -963,7 +963,7 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
     45.166244,
     -12.8275
   ],
-  "\"South Africa\"": [
+  "South Africa": [
     22.937506,
     -30.559482
   ],
@@ -974,22 +974,6 @@ export const COUNTRY_CENTROIDS: Record<string, [number, number]> = {
   "Zimbabwe": [
     29.154857,
     -19.015438
-  ],
-  "United States": [
-    -95.712891,
-    37.09024
-  ],
-  "United Kingdom": [
-    -3.435973,
-    55.378051
-  ],
-  "South Korea": [
-    127.766922,
-    35.907757
-  ],
-  "Equatorial Guinea": [
-    10.267895,
-    1.650801
   ],
   "Ivory Coast": [
     -5.5471,
