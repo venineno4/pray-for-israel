@@ -3,6 +3,7 @@
 import { memo, useState, useEffect } from "react";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { geoCentroid } from "d3-geo";
+import { COUNTRY_CENTROIDS } from "@/utils/countryCentroids";
 
 const geoUrl = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
 
@@ -76,16 +77,39 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                   />
                 );
               })}
-              {geographies.map((geo) => {
-                const geoName = geo.properties.name;
-                const isMatch = isCountryActive(geoName);
+              {activeCountries.map((country) => {
+                // Try to find the geography in 110m.json
+                const geo = geographies.find((g) => {
+                  const geoName = g.properties.name;
+                  if (geoName === country) return true;
+                  if (country === "United States" && geoName === "United States of America") return true;
+                  if (country === "South Korea" && geoName === "South Korea") return true;
+                  if (country === "United Kingdom" && geoName === "United Kingdom") return true;
+                  if (country === "Equatorial Guinea" && geoName === "Eq. Guinea") return true;
+                  if (country === "DR Congo" && geoName === "Dem. Rep. Congo") return true;
+                  if (country === "Central African Republic" && geoName === "Central African Rep.") return true;
+                  if (country === "Dominican Republic" && geoName === "Dominican Rep.") return true;
+                  if (country === "Bosnia and Herzegovina" && geoName === "Bosnia and Herz.") return true;
+                  if (country === "Solomon Islands" && geoName === "Solomon Is.") return true;
+                  if (country === "Falkland Islands" && geoName === "Falkland Is.") return true;
+                  return false;
+                });
                 
-                if (!isMatch) return null;
+                let centroid: [number, number] | null = null;
                 
-                const centroid = geoCentroid(geo);
+                if (COUNTRY_CENTROIDS[country]) {
+                  centroid = COUNTRY_CENTROIDS[country];
+                } else if (geo) {
+                  const c = geoCentroid(geo);
+                  if (!isNaN(c[0]) && !isNaN(c[1])) {
+                    centroid = c;
+                  }
+                }
+                
+                if (!centroid) return null;
                 
                 return (
-                  <Marker key={`marker-${geo.rsmKey}`} coordinates={centroid}>
+                  <Marker key={`marker-${country}`} coordinates={centroid}>
                     <circle r={18} fill="url(#pinprickGlow)" />
                     <circle r={5} fill="#FFFFFF" />
                   </Marker>
