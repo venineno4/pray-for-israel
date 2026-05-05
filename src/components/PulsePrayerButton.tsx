@@ -81,7 +81,20 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
       } catch (_) {}
       try {
         if (typeof window !== 'undefined' && (window as any).fbq) {
-          (window as any).fbq('track', 'Subscribe', { content_category: 'Prayer', content_name: country });
+          const eventId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
+          (window as any).fbq('track', 'Subscribe', { content_category: 'Prayer', content_name: country }, { eventID: eventId });
+          
+          fetch('/api/meta', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              eventName: 'Subscribe',
+              eventId: eventId,
+              eventSourceUrl: window.location.href,
+              clientUserAgent: navigator.userAgent,
+              customData: { content_category: 'Prayer', content_name: country }
+            })
+          }).catch(console.error);
         }
       } catch (_) {}
         

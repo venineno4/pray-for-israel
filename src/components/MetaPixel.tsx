@@ -18,7 +18,20 @@ export default function MetaPixel() {
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('init', '${META_PIXEL_ID}');
-          fbq('track', 'PageView');
+          
+          var eventId = window.crypto && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
+          fbq('track', 'PageView', {}, { eventID: eventId });
+
+          fetch('/api/meta', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              eventName: 'PageView',
+              eventId: eventId,
+              eventSourceUrl: window.location.href,
+              clientUserAgent: navigator.userAgent
+            })
+          }).catch(function(e) {});
         `}
       </Script>
       <noscript>

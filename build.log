@@ -9,38 +9,66 @@
  ✓ Compiled successfully
    Linting and checking validity of types ...
    Collecting page data ...
-   Generating static pages (0/6) ...
-   Generating static pages (1/6) 
-   Generating static pages (2/6) 
-   Generating static pages (4/6) 
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
 Error: supabaseUrl is required.
-    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:51291
-    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:51542)
-    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:55329)
-    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:3055)
+    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51291
+    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51542)
+    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:55329)
+    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:12:341)
     at t (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
-    at 3830 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:2383)
+    at 3830 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:2763)
     at Object.t [as require] (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
     at require (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18365)
     at I (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:94362)
     at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:96668 {
-  digest: '846108525'
+  digest: '2528966884'
 }
+   Generating static pages (5/7) 
 
 Error occurred prerendering page "/widget". Read more: https://nextjs.org/docs/messages/prerender-error
 
 Error: supabaseUrl is required.
-    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:51291
-    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:51542)
-    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/373.js:37:55329)
-    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:3055)
+    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51291
+    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51542)
+    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:55329)
+    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:12:341)
     at t (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
-    at 3830 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:2383)
+    at 3830 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/widget/page.js:1:2763)
     at Object.t [as require] (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
     at require (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18365)
     at I (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:94362)
     at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:96668
- ✓ Generating static pages (6/6)
+Error: supabaseUrl is required.
+    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51291
+    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51542)
+    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:55329)
+    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/page.js:24:20074)
+    at t (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
+    at 3741 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/page.js:20:4010)
+    at Object.t [as require] (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
+    at require (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18365)
+    at I (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:94362)
+    at C (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:92913) {
+  digest: '3319703452'
+}
+
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: supabaseUrl is required.
+    at /Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51291
+    at new rW (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:51542)
+    at rK (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/chunks/751.js:37:55329)
+    at 355 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/page.js:24:20074)
+    at t (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
+    at 3741 (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/app/page.js:20:4010)
+    at Object.t [as require] (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/.next/server/webpack-runtime.js:1:128)
+    at require (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:16:18365)
+    at I (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:94362)
+    at C (/Users/vilmosyehudafrank/.gemini/antigravity/scratch/pray-for-israel/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:92913)
+ ✓ Generating static pages (7/7)
 
 > Export encountered errors on following paths:
+	/page: /
 	/widget/page: /widget
