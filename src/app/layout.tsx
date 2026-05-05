@@ -1,78 +1,59 @@
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import MetaPixel from '@/components/MetaPixel';
 import Script from 'next/script';
-import '../globals.css';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
-  const title = "Pray for Israel Live | 24/7 Global Prayer Map";
-  const description = "Join the global live prayer for Israel from your country. See who is praying worldwide right now!";
-  const url = "https://prayforisrael.live";
-  // Absolute URL required — WhatsApp & Facebook crawlers do NOT follow relative paths
-  const ogImage = "https://prayforisrael.live/og-image.jpg";
-  const ogImageWidth = 1024;
-  const ogImageHeight = 1024;
-
-  return {
-    title: title,
-    description: description,
-    manifest: '/manifest.json',
-    metadataBase: new URL(url),
-    openGraph: {
-      title: title,
-      description: description,
-      url: url,
-      siteName: 'Pray for Israel',
-      images: [
-        {
-          url: ogImage,
-          width: ogImageWidth,
-          height: ogImageHeight,
-          alt: 'Pray for Israel — You are not praying alone.',
-        },
-      ],
-      locale: locale,
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: title,
-      description: description,
-      images: [ogImage],
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Pray for Israel Live | 24/7 Global Prayer Map",
+  description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
+  manifest: '/manifest.json',
+  metadataBase: new URL("https://prayforisrael.live"),
+  openGraph: {
+    title: "Pray for Israel Live | 24/7 Global Prayer Map",
+    description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
+    url: "https://prayforisrael.live",
+    siteName: 'Pray for Israel',
+    images: [
+      {
+        url: "https://prayforisrael.live/og-image.jpg",
+        width: 1024,
+        height: 1024,
+        alt: 'Pray for Israel — You are not praying alone.',
+      },
+    ],
+    locale: "en_US",
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Pray for Israel Live | 24/7 Global Prayer Map",
+    description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
+    images: ["https://prayforisrael.live/og-image.jpg"],
+  },
+};
 
 export const viewport: Viewport = {
-  themeColor: '#FFFFFF', // Updated to match Dignified Unity light background
+  themeColor: '#FFFFFF',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
 };
 
-interface RootLayoutProps {
-  children: React.ReactNode;
-  params: { locale: string };
-}
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
-  params: { locale }
-}: RootLayoutProps) {
-  const messages = await getMessages();
+}: {
+  children: React.ReactNode;
+}) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body className={`${inter.className} bg-primary-white text-text-dark antialiased`}>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        {children}
         
         {gaId && <GoogleAnalytics gaId={gaId} />}
         <MetaPixel />

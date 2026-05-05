@@ -1,0 +1,55 @@
+Retrieving project…
+Deploying venineno4s-projects/israel-prayer-live-dashboard
+Uploading [--------------------] (0.0B/81B)
+Uploading [====================] (81.0B/81B)
+Inspect: https://vercel.com/venineno4s-projects/israel-prayer-live-dashboard/Fisk9uLgAoEzYWX6ASPKHfX3oUrg [3s]
+Production: https://israel-prayer-live-dashboard-hy6qnuayt-venineno4s-projects.vercel.app [3s]
+https://israel-prayer-live-dashboard-hy6qnuayt-venineno4s-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 58 deployment files...
+Building: Restored build cache from previous deployment (HWN3QoyyMXZqwpFyVnJ77RzLRqbr)
+Building: Running "vercel build"
+Building: Vercel CLI 51.6.1
+Building: Installing dependencies...
+Building: up to date in 947ms
+Building: 150 packages are looking for funding
+Building: run `npm fund` for details
+Building: Detected Next.js version: 14.2.3
+Building: Running "npm run build"
+Building: > pray-for-israel-pwa@0.1.0 build
+Building: > next build
+Building: ▲ Next.js 14.2.3
+Building: - Environments: .env.production
+Building: Creating an optimized production build ...
+Building: Failed to compile.
+Building: ./src/app/widget/page.tsx
+Building: Error:
+Building: x the name `dynamic` is defined multiple times
+Building: ,-[/vercel/path0/src/app/widget/page.tsx:2:1]
+Building: 2 |
+Building: 3 | import { useEffect, useState } from "react";
+Building: 4 | import { supabase } from "@/utils/supabaseClient";
+Building: 5 | import dynamic from "next/dynamic";
+Building: :        ^^^|^^^
+Building: :           `-- previous definition of `dynamic` here
+Building: 6 |
+Building: 7 | const LiveMap = dynamic(() => import("@/components/LiveMap"), {
+Building: 8 |   ssr: false,
+Building: 9 |   loading: () => <div className="w-full h-full flex items-center justify-center text-gray-400">Loading map...</div>
+Building: 10 | });
+Building: 11 |
+Building: 12 | export const dynamic = 'force-dynamic';
+Building: :              ^^^|^^^
+Building: :                 `-- `dynamic` redefined here
+Building: 13 |
+Building: 14 | export default function WidgetPage() {
+Building: 15 |   const [activeCountries, setActiveCountries] = useState<string[]>([]);
+Building: `----
+Building: Import trace for requested module:
+Building: ./src/app/widget/page.tsx
+Building: > Build failed because of webpack errors
+Building: Error: Command "npm run build" exited with 1
+Error: Command "npm run build" exited with 1
