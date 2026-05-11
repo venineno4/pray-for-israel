@@ -32,6 +32,22 @@ export default function MetaPixel() {
               clientUserAgent: navigator.userAgent
             })
           }).catch(function(e) {});
+
+          setTimeout(function() {
+            var vcEventId = window.crypto && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
+            fbq('track', 'ViewContent', {}, { eventID: vcEventId });
+
+            fetch('/api/meta', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                eventName: 'ViewContent',
+                eventId: vcEventId,
+                eventSourceUrl: window.location.href,
+                clientUserAgent: navigator.userAgent
+              })
+            }).catch(function(e) {});
+          }, 5000);
         `}
       </Script>
       <noscript>
