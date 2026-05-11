@@ -1,13 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const { eventName, eventId, eventSourceUrl, clientUserAgent, customData } = body;
 
-    // Extract IP address correctly from Vercel headers
-    // Vercel populates 'x-forwarded-for' and 'x-real-ip'
-    const clientIpAddress = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || '0.0.0.0';
+    // Extract IP address correctly from Vercel/Cloudflare headers
+    // Vercel populates req.ip natively. Fallback to common proxy headers.
+    const clientIpAddress = req.ip || req.headers.get('x-real-ip') || req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for') || '0.0.0.0';
 
     const pixelId = "1008459651842584";
     const accessToken = process.env.META_ACCESS_TOKEN;
