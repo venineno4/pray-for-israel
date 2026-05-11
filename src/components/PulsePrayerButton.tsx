@@ -14,48 +14,118 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const sessionIdRef = useRef("");
+
   useEffect(() => {
-    // Per-session ID: unique to this browser tab / prayer session
-    setSessionId(crypto.randomUUID());
+    sessionIdRef.current = sessionId;
+  }, [sessionId]);
 
-    // Persistent anonymous user ID: survives page reloads
-    // This lets us count truly unique people across sessions
-    let storedUserId = localStorage.getItem("pfi_user_id");
-    if (!storedUserId) {
-      storedUserId = crypto.randomUUID();
-      localStorage.setItem("pfi_user_id", storedUserId);
-    }
-    setUserId(storedUserId);
-
-    // Cleanup timeout on unmount
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
-  const stopPraying = async () => {
+  const stopPraying = async (updateDb = true, targetSessionId?: string) => {
     setIsActive(false);
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
     }
     
-    try {
-      await supabase
-        .from("prayers")
-        .update({ is_active: false })
-        .eq("session_id", sessionId);
-    } catch (err) {
-      console.error("Failed to stop praying:", err);
+    localStorage.removeItem("pfi_active_prayer");
+    
+    const idToStop = targetSessionId || sessionIdRef.current;
+    
+    // Always regenerate a fresh session ID for the NEXT prayer
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      setSessionId(crypto.randomUUID());
+    }
+    
+    if (updateDb && idToStop) {
+      try {
+        await supabase
+          .from("prayers")
+          .update({ is_active: false })
+          .eq("session_id", idToStop);
+      } catch (err) {
+        console.error("Failed to stop praying:", err);
+      }
     }
   };
 
+  useEffect(() => {
+    let storedUserId = localStorage.getItem("pfi_user_id");
+    if (!storedUserId) {
+      storedUserId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2);
+      localStorage.setItem("pfi_user_id", storedUserId);
+    }
+    setUserId(storedUserId);
+
+    const activePrayerStr = localStorage.getItem("pfi_active_prayer");
+    let initialSessionId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2);
+    
+    if (activePrayerStr) {
+      try {
+        const activePrayer = JSON.parse(activePrayerStr);
+        const now = Date.now();
+        if (activePrayer.until > now) {
+          setIsActive(true);
+          setSelectedCountry(activePrayer.country);
+          initialSessionId = activePrayer.sessionId;
+          
+          const remaining = activePrayer.until - now;
+          timeoutRef.current = setTimeout(() => {
+            stopPraying(true, activePrayer.sessionId);
+          }, remaining);
+        } else {
+          localStorage.removeItem("pfi_active_prayer");
+        }
+      } catch (e) {
+        localStorage.removeItem("pfi_active_prayer");
+      }
+    }
+    
+    setSessionId(initialSessionId);
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === "pfi_active_prayer") {
+        if (!e.newValue) {
+          setIsActive(false);
+          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        } else {
+          try {
+            const data = JSON.parse(e.newValue);
+            if (data.until > Date.now()) {
+              setIsActive(true);
+              setSelectedCountry(data.country);
+              setSessionId(data.sessionId);
+              if (timeoutRef.current) clearTimeout(timeoutRef.current);
+              timeoutRef.current = setTimeout(() => {
+                stopPraying(true, data.sessionId);
+              }, data.until - Date.now());
+            }
+          } catch (err) {}
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorage);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      window.removeEventListener("storage", handleStorage);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleButtonClick = async () => {
     if (!isActive) {
-      // Start praying -> Open Modal
+      const activeStr = localStorage.getItem("pfi_active_prayer");
+      if (activeStr) {
+        try {
+          const parsed = JSON.parse(activeStr);
+          if (parsed.until > Date.now()) {
+            alert("You already have an active prayer session on this device. Please wait or stop it first.");
+            return;
+          }
+        } catch (e) {}
+      }
       setIsModalOpen(true);
     } else {
-      // Stop praying -> Update Supabase
       await stopPraying();
     }
   };
@@ -65,11 +135,20 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
     setIsModalOpen(false);
     setIsActive(true);
     
+    const duration = 5 * 60 * 1000;
+    const until = Date.now() + duration;
+    
+    localStorage.setItem("pfi_active_prayer", JSON.stringify({
+      until,
+      sessionId: sessionIdRef.current || sessionId,
+      country
+    }));
+
     try {
       await supabase
         .from("prayers")
         .insert([{
-          session_id: sessionId,
+          session_id: sessionIdRef.current || sessionId,
           user_id: userId,        // persistent anonymous ID for unique tracking
           country: country,
           is_active: true,
@@ -98,15 +177,15 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         }
       } catch (_) {}
         
-      // Set 5-minute timeout (300,000 ms) to automatically toggle off
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
-        stopPraying();
-      }, 300000);
+        stopPraying(true, sessionIdRef.current || sessionId);
+      }, duration);
       
     } catch (err) {
       console.error("Failed to start praying:", err);
       setIsActive(false);
+      localStorage.removeItem("pfi_active_prayer");
     }
   };
 

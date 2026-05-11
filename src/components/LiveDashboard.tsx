@@ -39,7 +39,8 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
       let query = supabase
         .from("prayers")
         .select("country")
-        .gte("started_at", fiveMinsAgo);
+        .gte("started_at", fiveMinsAgo)
+        .eq("is_active", true);
 
       if (selectedCountry !== "All") {
         query = query.eq("country", selectedCountry);
