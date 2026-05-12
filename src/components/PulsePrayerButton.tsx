@@ -135,7 +135,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
     setIsModalOpen(false);
     setIsActive(true);
     
-    const duration = 5 * 60 * 1000;
+    const duration = 10 * 60 * 1000;
     const until = Date.now() + duration;
     
     localStorage.setItem("pfi_active_prayer", JSON.stringify({
@@ -261,7 +261,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
               You are joined with believers worldwide.
             </p>
             <p className="mt-1 md:mt-2 text-sm md:text-base font-medium text-gray-500 opacity-80">
-              (Auto-close in 5m)
+              (Auto-close in 10m)
             </p>
           </>
         ) : (

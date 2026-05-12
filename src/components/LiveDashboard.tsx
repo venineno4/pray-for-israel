@@ -33,13 +33,13 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
   // Live Subscription Effect
   useEffect(() => {
     const fetchInitialCount = async () => {
-      // Only count prayers started within the last 5 minutes to avoid stuck sessions if tabs are closed
-      const fiveMinsAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+      // Only count prayers started within the last 10 minutes to avoid stuck sessions if tabs are closed
+      const tenMinsAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
 
       let query = supabase
         .from("prayers")
         .select("country")
-        .gte("started_at", fiveMinsAgo)
+        .gte("started_at", tenMinsAgo)
         .eq("is_active", true);
 
       if (selectedCountry !== "All") {
