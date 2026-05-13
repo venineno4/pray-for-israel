@@ -130,8 +130,8 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
         // Global Aggregation
         const totalPrayers = allData.length;
-        const uniqueSessionIds = new Set(allData.map(d => d.session_id));
-        const uniquePrayers = uniqueSessionIds.size;
+        const uniqueUsers = new Set(allData.map(d => d.user_id || d.session_id));
+        const uniquePrayers = uniqueUsers.size;
 
         if (metricType === "total") {
           setTotalHistorical(totalPrayers);
