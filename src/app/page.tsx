@@ -10,7 +10,7 @@ export default function Home() {
           Pray for Israel
         </h1>
         <p className="text-sm md:text-xl text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-2xl mx-auto font-bold">
-          “I will bless those who bless you” (Genesis 12:3)
+          “Pray for the peace of Jerusalem” (Psalm 122:6)
         </p>
       </div>
 
