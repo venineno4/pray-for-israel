@@ -12,6 +12,22 @@ export const metadata: Metadata = {
   description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
   manifest: '/manifest.json',
   metadataBase: new URL("https://prayforisrael.live"),
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'icon',
+        url: '/android-chrome-192x192.png',
+        sizes: '192x192',
+      },
+    ],
+  },
   openGraph: {
     title: "Pray for Israel Live | 24/7 Global Prayer Map",
     description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
