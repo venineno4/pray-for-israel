@@ -1,5 +1,6 @@
 import PulsePrayerButton from '@/components/PulsePrayerButton';
 import LiveDashboard from '@/components/LiveDashboard';
+import InformationalSection from '@/components/InformationalSection';
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         {/* Live Dashboard Section - Right Column */}
         <div className="w-full">
           <LiveDashboard count={1245} />
+          <InformationalSection />
         </div>
       </div>
 
