@@ -39,7 +39,7 @@ export default function InformationalSection() {
             </p>
           </div>
           <a
-            href="https://allisraelnews.com"
+            href="https://allisraelnews.com/?utm_source=prayforisrael.live&utm_medium=referral&utm_campaign=live-map"
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full text-center bg-primary-gold text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-yellow-500 transition-colors shadow-sm"
