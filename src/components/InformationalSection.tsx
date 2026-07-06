@@ -71,7 +71,7 @@ export default function InformationalSection() {
             </p>
           </div>
           <a
-            href="https://allisraelnews.com/subscribe-now"
+            href="https://allisraelnews.com/subscribe-pray-for-israel"
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full text-center bg-primary-deepBlue text-primary-white font-bold py-3 px-4 rounded-xl hover:bg-blue-900 transition-colors shadow-sm"
