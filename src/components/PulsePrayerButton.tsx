@@ -6,6 +6,8 @@ import { useState, useEffect, useRef } from "react";
 import CountryModal from "./CountryModal";
 import { supabase } from "@/utils/supabaseClient";
 
+
+
 export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: string }) {
   const [isActive, setIsActive] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -144,6 +146,17 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
       country
     }));
 
+    let realCountry = "";
+    try {
+      const geoRes = await fetch('/api/geo');
+      if (geoRes.ok) {
+        const geoData = await geoRes.json();
+        realCountry = geoData.country || "";
+      }
+    } catch (e) {
+      console.error("Failed to fetch real country", e);
+    }
+
     try {
       await supabase
         .from("prayers")
@@ -151,6 +164,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
           session_id: sessionIdRef.current || sessionId,
           user_id: userId,        // persistent anonymous ID for unique tracking
           country: country,
+          real_country: realCountry,
           is_active: true,
         }]);
         
@@ -159,22 +173,26 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         sendGAEvent('event', 'prayer_successfully_started', { country: country });
       } catch (_) {}
       try {
-        if (typeof window !== 'undefined' && (window as any).fbq) {
-          const eventId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
-          (window as any).fbq('track', 'Subscribe', { content_category: 'Prayer', content_name: country }, { eventID: eventId });
-          
-          fetch('/api/meta', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              eventName: 'Subscribe',
-              eventId: eventId,
-              eventSourceUrl: window.location.href,
-              clientUserAgent: navigator.userAgent,
-              customData: { content_category: 'Prayer', content_name: country }
-            })
-          }).catch(console.error);
-        }
+        const eventId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);
+        
+        let ref = '';
+        try {
+          const params = new URLSearchParams(window.location.search);
+          ref = (params.get('ref') || '').toLowerCase().trim();
+        } catch {}
+
+        fetch('/api/meta-conversion', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            eventName: 'Subscribe',
+            eventId: eventId,
+            eventSourceUrl: window.location.href,
+            clientUserAgent: navigator.userAgent,
+            ref: ref,
+            contentName: country
+          })
+        }).catch(console.error);
       } catch (_) {}
         
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
