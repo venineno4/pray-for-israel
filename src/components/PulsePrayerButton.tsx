@@ -190,7 +190,8 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
             eventSourceUrl: window.location.href,
             clientUserAgent: navigator.userAgent,
             ref: ref,
-            contentName: country
+            contentName: country,
+            contentCategory: realCountry
           })
         }).catch(console.error);
       } catch (_) {}
