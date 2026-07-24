@@ -29,6 +29,20 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Pre-Footer Article Link */}
+      <p className="text-center text-base font-normal text-gray-700 mt-16 mb-8 px-4">
+        Learn more about the global impact of this prayer chain in{' '}
+        <a
+          href="https://allisraelnews.com/tens-of-thousands-from-189-countries-join-pray-for-israel-live-in-just-10-weeks?utm_source=prayforisrael.live&utm_medium=referral&utm_campaign=pfi_organic_funnel&utm_content=footer_text_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-gray-900 underline hover:text-blue-600 transition-colors"
+        >
+          this recent article
+        </a>
+        .
+      </p>
+
       {/* Footer Section */}
       <footer className="w-full text-center mt-12 md:mt-16 pb-4">
         <p className="text-sm text-gray-500">
