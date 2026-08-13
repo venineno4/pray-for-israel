@@ -30,54 +30,64 @@ export default function DailyAlertsBanner() {
       setIsLoading(false);
     }, 3000);
 
-    const checkSubscription = async () => {
+    try {
       window.OneSignal = window.OneSignal || [];
 
-      const setupListener = () => {
-        // v16 SDK API: OneSignal.User.PushSubscription.addEventListener
-        if (window.OneSignal?.User?.PushSubscription?.addEventListener) {
-          window.OneSignal.User.PushSubscription.addEventListener('change', (event: any) => {
-            const isOptedIn = event?.current?.optedIn === true;
-            setIsSubscribed(isOptedIn);
-            if (isOptedIn) {
+      // All listener setup and subscription checks happen inside the
+      // OneSignal.push() queue so they only execute after full SDK init.
+      window.OneSignal.push(() => {
+        try {
+          // v16 SDK: User.PushSubscription.addEventListener
+          if (
+            window.OneSignal.User &&
+            window.OneSignal.User.PushSubscription &&
+            typeof window.OneSignal.User.PushSubscription.addEventListener === 'function'
+          ) {
+            window.OneSignal.User.PushSubscription.addEventListener('change', (event: any) => {
               try {
-                sendGAEvent('event', 'push_optin_success');
+                const isOptedIn = !!(event && event.current && event.current.optedIn);
+                setIsSubscribed(isOptedIn);
+                if (isOptedIn) {
+                  try { sendGAEvent('event', 'push_optin_success'); } catch (_) {}
+                }
               } catch (_) {}
-            }
-          });
-        }
-        // v15 SDK fallback: OneSignal.on('subscriptionChange')
-        if (window.OneSignal?.on) {
-          window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
-            setIsSubscribed(subscribed);
-            if (subscribed) {
-              try {
-                sendGAEvent('event', 'push_optin_success');
-              } catch (_) {}
-            }
-          });
-        }
-      };
+            });
+          }
 
-      if (window.OneSignal.initialized) {
-        setupListener();
-        const isOptedIn = await window.OneSignal.isPushNotificationsEnabled();
-        setIsSubscribed(isOptedIn);
-        setIsLoading(false);
-        clearTimeout(fallbackTimer);
-      } else {
-        window.OneSignal.push(() => {
-          setupListener();
-          window.OneSignal.isPushNotificationsEnabled().then((isOptedIn: boolean) => {
-            setIsSubscribed(isOptedIn);
+          // v15 SDK fallback: on('subscriptionChange')
+          if (typeof window.OneSignal.on === 'function') {
+            window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
+              setIsSubscribed(subscribed);
+              if (subscribed) {
+                try { sendGAEvent('event', 'push_optin_success'); } catch (_) {}
+              }
+            });
+          }
+
+          // Check current subscription status
+          if (typeof window.OneSignal.isPushNotificationsEnabled === 'function') {
+            window.OneSignal.isPushNotificationsEnabled()
+              .then((isOptedIn: boolean) => {
+                setIsSubscribed(isOptedIn);
+                setIsLoading(false);
+                clearTimeout(fallbackTimer);
+              })
+              .catch(() => {
+                setIsLoading(false);
+                clearTimeout(fallbackTimer);
+              });
+          } else {
             setIsLoading(false);
             clearTimeout(fallbackTimer);
-          });
-        });
-      }
-    };
-
-    checkSubscription();
+          }
+        } catch (_) {
+          setIsLoading(false);
+          clearTimeout(fallbackTimer);
+        }
+      });
+    } catch (_) {
+      // OneSignal completely unavailable — fallback timer handles loading state
+    }
 
     return () => clearTimeout(fallbackTimer);
   }, []);
