@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { sendGAEvent } from '@next/third-parties/google';
 
 declare global {
   interface Window {
     OneSignal: any;
-    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -36,8 +36,10 @@ export default function DailyAlertsBanner() {
       const setupListener = () => {
         window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
           setIsSubscribed(subscribed);
-          if (subscribed && typeof window.gtag === 'function') {
-            window.gtag('event', 'push_optin_success');
+          if (subscribed) {
+            try {
+              sendGAEvent('event', 'push_optin_success');
+            } catch (_) {}
           }
         });
       };
@@ -69,9 +71,9 @@ export default function DailyAlertsBanner() {
     if (isSubscribed) return;
 
     // Track click intent
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'push_optin_click');
-    }
+    try {
+      sendGAEvent('event', 'push_optin_click');
+    } catch (_) {}
 
     // On iOS, show the Add-to-Home-Screen tip instead
     if (iosDevice) {
