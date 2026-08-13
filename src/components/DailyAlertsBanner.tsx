@@ -34,14 +34,29 @@ export default function DailyAlertsBanner() {
       window.OneSignal = window.OneSignal || [];
 
       const setupListener = () => {
-        window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
-          setIsSubscribed(subscribed);
-          if (subscribed) {
-            try {
-              sendGAEvent('event', 'push_optin_success');
-            } catch (_) {}
-          }
-        });
+        // v16 SDK API: OneSignal.User.PushSubscription.addEventListener
+        if (window.OneSignal?.User?.PushSubscription?.addEventListener) {
+          window.OneSignal.User.PushSubscription.addEventListener('change', (event: any) => {
+            const isOptedIn = event?.current?.optedIn === true;
+            setIsSubscribed(isOptedIn);
+            if (isOptedIn) {
+              try {
+                sendGAEvent('event', 'push_optin_success');
+              } catch (_) {}
+            }
+          });
+        }
+        // v15 SDK fallback: OneSignal.on('subscriptionChange')
+        if (window.OneSignal?.on) {
+          window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
+            setIsSubscribed(subscribed);
+            if (subscribed) {
+              try {
+                sendGAEvent('event', 'push_optin_success');
+              } catch (_) {}
+            }
+          });
+        }
       };
 
       if (window.OneSignal.initialized) {
