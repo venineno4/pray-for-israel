@@ -68,16 +68,12 @@ export default function DailyAlertsBanner() {
   }, []);
 
   const handleClick = () => {
-    alert('Step 1: Button clicked');
-
     if (isSubscribed) return;
 
-    // GA4 tracking — isolated so it can NEVER block execution
+    // GA4 tracking — isolated so it can never block execution
     try {
       sendGAEvent('event', 'push_optin_click');
-    } catch (gaErr) {
-      console.warn('GA4 sendGAEvent failed (non-blocking):', gaErr);
-    }
+    } catch (_) {}
 
     // On iOS, show the Add-to-Home-Screen tip instead
     if (iosDevice) {
@@ -85,41 +81,21 @@ export default function DailyAlertsBanner() {
       return;
     }
 
-    alert('Step 2: Reached OneSignal trigger');
+    // Guard: OneSignal must be loaded
+    if (!window.OneSignal) return;
 
-    // Check OneSignal object
-    if (!window.OneSignal) {
-      alert('Debug: OneSignal object is missing.');
-      return;
-    }
-
-    // Check browser notification permission
+    // Guard: browser has not explicitly blocked notifications
     if (typeof Notification !== 'undefined' && Notification.permission === 'denied') {
-      alert('Debug: Notifications are explicitly blocked by the browser.');
       return;
     }
 
-    // Trigger OneSignal prompt
-    try {
-      window.OneSignal.push(() => {
-        try {
-          window.OneSignal.registerForPushNotifications()
-            .then(() => {
-              alert('Step 3: registerForPushNotifications resolved OK');
-            })
-            .catch((err: any) => {
-              alert('OneSignal Trigger Error: ' + (err?.message || String(err)));
-              console.error('OneSignal registerForPushNotifications error:', err);
-            });
-        } catch (innerErr: any) {
-          alert('OneSignal Inner Error: ' + (innerErr?.message || String(innerErr)));
-          console.error('OneSignal inner error:', innerErr);
-        }
-      });
-    } catch (outerErr: any) {
-      alert('OneSignal Outer Error: ' + (outerErr?.message || String(outerErr)));
-      console.error('OneSignal outer error:', outerErr);
-    }
+    // Trigger native OneSignal permission prompt
+    window.OneSignal.push(() => {
+      window.OneSignal.registerForPushNotifications()
+        ?.catch?.((err: any) => {
+          console.error('OneSignal subscription error:', err);
+        });
+    });
   };
 
   return (
