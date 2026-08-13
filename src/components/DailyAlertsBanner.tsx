@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 declare global {
   interface Window {
     OneSignal: any;
+    gtag?: (...args: any[]) => void;
   }
 }
 
@@ -35,6 +36,9 @@ export default function DailyAlertsBanner() {
       const setupListener = () => {
         window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
           setIsSubscribed(subscribed);
+          if (subscribed && typeof window.gtag === 'function') {
+            window.gtag('event', 'push_optin_success');
+          }
         });
       };
 
@@ -63,6 +67,11 @@ export default function DailyAlertsBanner() {
 
   const handleClick = () => {
     if (isSubscribed) return;
+
+    // Track click intent
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'push_optin_click');
+    }
 
     // On iOS, show the Add-to-Home-Screen tip instead
     if (iosDevice) {
