@@ -23,6 +23,12 @@ export default function DailyAlertsBanner() {
   useEffect(() => {
     setIosDevice(detectIOS());
 
+    // Fallback: if OneSignal never initializes (e.g. preview domain),
+    // stop loading after 3 seconds so the button is always visible.
+    const fallbackTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+
     const checkSubscription = async () => {
       window.OneSignal = window.OneSignal || [];
 
@@ -37,18 +43,22 @@ export default function DailyAlertsBanner() {
         const isOptedIn = await window.OneSignal.isPushNotificationsEnabled();
         setIsSubscribed(isOptedIn);
         setIsLoading(false);
+        clearTimeout(fallbackTimer);
       } else {
         window.OneSignal.push(() => {
           setupListener();
           window.OneSignal.isPushNotificationsEnabled().then((isOptedIn: boolean) => {
             setIsSubscribed(isOptedIn);
             setIsLoading(false);
+            clearTimeout(fallbackTimer);
           });
         });
       }
     };
 
     checkSubscription();
+
+    return () => clearTimeout(fallbackTimer);
   }, []);
 
   const handleClick = () => {
@@ -124,7 +134,8 @@ export default function DailyAlertsBanner() {
               <button
                 id="push-optin-btn"
                 onClick={handleClick}
-                className="w-full md:w-auto px-8 py-3 bg-primary-gold text-primary-deepBlue font-bold text-sm md:text-[15px] rounded-xl hover:bg-yellow-400 active:scale-[0.97] transition-all duration-200 shadow-lg shadow-primary-gold/20 tracking-wide cursor-pointer"
+                style={{ backgroundColor: '#D4AF37', color: '#0B2B5A' }}
+                className="w-full md:w-auto px-8 py-3 font-bold text-sm md:text-[15px] rounded-xl hover:bg-yellow-400 active:scale-[0.97] transition-all duration-200 shadow-lg tracking-wide cursor-pointer"
               >
                 Enable Daily Alerts
               </button>
