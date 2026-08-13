@@ -82,10 +82,36 @@ export default function DailyAlertsBanner() {
     }
 
     // On Android/Desktop, trigger the native OneSignal permission prompt
-    if (!window.OneSignal) return;
-    window.OneSignal.push(() => {
-      window.OneSignal.registerForPushNotifications();
-    });
+    if (!window.OneSignal) {
+      alert('Debug: OneSignal object is missing.');
+      return;
+    }
+
+    if (typeof Notification !== 'undefined' && Notification.permission === 'denied') {
+      alert('Debug: Notifications are explicitly blocked by the browser. Please reset notification permissions for this site in your browser settings.');
+      return;
+    }
+
+    try {
+      window.OneSignal.push(() => {
+        try {
+          window.OneSignal.registerForPushNotifications()
+            .then(() => {
+              console.log('OneSignal: registerForPushNotifications resolved');
+            })
+            .catch((err: any) => {
+              alert('OneSignal Trigger Error: ' + (err?.message || String(err)));
+              console.error('OneSignal registerForPushNotifications error:', err);
+            });
+        } catch (innerErr: any) {
+          alert('OneSignal Inner Error: ' + (innerErr?.message || String(innerErr)));
+          console.error('OneSignal inner error:', innerErr);
+        }
+      });
+    } catch (outerErr: any) {
+      alert('OneSignal Outer Error: ' + (outerErr?.message || String(outerErr)));
+      console.error('OneSignal outer error:', outerErr);
+    }
   };
 
   return (
