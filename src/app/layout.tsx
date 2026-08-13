@@ -94,6 +94,10 @@ export default function RootLayout({
                 notifyButton: {
                   enable: false,
                 },
+                autoResubscribe: true,
+                promptOptions: {
+                  autoPrompt: false,
+                },
                 allowLocalhostAsSecureOrigin: true,
                 chrome_web_icon: "https://prayforisrael.live/onesignal-icon.png",
                 firefox_icon: "https://prayforisrael.live/onesignal-icon.png",
