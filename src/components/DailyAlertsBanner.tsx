@@ -68,12 +68,16 @@ export default function DailyAlertsBanner() {
   }, []);
 
   const handleClick = () => {
+    alert('Step 1: Button clicked');
+
     if (isSubscribed) return;
 
-    // Track click intent
+    // GA4 tracking — isolated so it can NEVER block execution
     try {
       sendGAEvent('event', 'push_optin_click');
-    } catch (_) {}
+    } catch (gaErr) {
+      console.warn('GA4 sendGAEvent failed (non-blocking):', gaErr);
+    }
 
     // On iOS, show the Add-to-Home-Screen tip instead
     if (iosDevice) {
@@ -81,23 +85,27 @@ export default function DailyAlertsBanner() {
       return;
     }
 
-    // On Android/Desktop, trigger the native OneSignal permission prompt
+    alert('Step 2: Reached OneSignal trigger');
+
+    // Check OneSignal object
     if (!window.OneSignal) {
       alert('Debug: OneSignal object is missing.');
       return;
     }
 
+    // Check browser notification permission
     if (typeof Notification !== 'undefined' && Notification.permission === 'denied') {
-      alert('Debug: Notifications are explicitly blocked by the browser. Please reset notification permissions for this site in your browser settings.');
+      alert('Debug: Notifications are explicitly blocked by the browser.');
       return;
     }
 
+    // Trigger OneSignal prompt
     try {
       window.OneSignal.push(() => {
         try {
           window.OneSignal.registerForPushNotifications()
             .then(() => {
-              console.log('OneSignal: registerForPushNotifications resolved');
+              alert('Step 3: registerForPushNotifications resolved OK');
             })
             .catch((err: any) => {
               alert('OneSignal Trigger Error: ' + (err?.message || String(err)));
