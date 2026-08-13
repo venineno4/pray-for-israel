@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { sendGAEvent } from '@next/third-parties/google';
 
 declare global {
   interface Window {
@@ -35,6 +36,11 @@ export default function DailyAlertsBanner() {
       const setupListener = () => {
         window.OneSignal.on('subscriptionChange', (subscribed: boolean) => {
           setIsSubscribed(subscribed);
+          if (subscribed) {
+            try {
+              sendGAEvent('event', 'push_optin_success');
+            } catch (_) {}
+          }
         });
       };
 
@@ -64,16 +70,31 @@ export default function DailyAlertsBanner() {
   const handleClick = () => {
     if (isSubscribed) return;
 
+    // GA4 tracking — isolated so it can never block execution
+    try {
+      sendGAEvent('event', 'push_optin_click');
+    } catch (_) {}
+
     // On iOS, show the Add-to-Home-Screen tip instead
     if (iosDevice) {
       setShowIOSTip((prev) => !prev);
       return;
     }
 
-    // On Android/Desktop, trigger the native OneSignal permission prompt
+    // Guard: OneSignal must be loaded
     if (!window.OneSignal) return;
+
+    // Guard: browser has not explicitly blocked notifications
+    if (typeof Notification !== 'undefined' && Notification.permission === 'denied') {
+      return;
+    }
+
+    // Trigger native OneSignal permission prompt
     window.OneSignal.push(() => {
-      window.OneSignal.registerForPushNotifications();
+      window.OneSignal.registerForPushNotifications()
+        ?.catch?.((err: any) => {
+          console.error('OneSignal subscription error:', err);
+        });
     });
   };
 
