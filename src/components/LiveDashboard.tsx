@@ -25,7 +25,7 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
   // Historical Section State
   const [timeRange, setTimeRange] = useState<TimeRange>(24);
-  const [metricType, setMetricType] = useState<MetricType>("unique");
+  const [metricType, setMetricType] = useState<MetricType>("total");
   const [totalHistorical, setTotalHistorical] = useState(0);
   const [countryStats, setCountryStats] = useState<CountryStat[]>([]);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);

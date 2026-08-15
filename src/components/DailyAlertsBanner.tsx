@@ -103,6 +103,7 @@ export default function DailyAlertsBanner() {
       setPwaInstalled(true);
       setPwaInstallable(false);
       deferredPromptRef.current = null;
+      try { sendGAEvent('event', 'pwa_install_success'); } catch (_) {}
     };
 
     window.addEventListener('beforeinstallprompt', onBeforeInstall);
