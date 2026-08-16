@@ -1,7 +1,6 @@
 import PulsePrayerButton from '@/components/PulsePrayerButton';
 import LiveDashboard from '@/components/LiveDashboard';
 import InformationalSection from '@/components/InformationalSection';
-import DailyAlertsBanner from '@/components/DailyAlertsBanner';
 
 export default function Home() {
   return (
@@ -29,9 +28,6 @@ export default function Home() {
           <InformationalSection />
         </div>
       </div>
-
-      {/* Daily Push Notification Opt-In */}
-      <DailyAlertsBanner />
 
       {/* Pre-Footer Article Link */}
       <p className="text-center text-base font-normal text-gray-700 mt-16 mb-8 px-4">

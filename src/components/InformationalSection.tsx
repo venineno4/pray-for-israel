@@ -1,4 +1,5 @@
 import React from 'react';
+import DailyAlertsBanner from '@/components/DailyAlertsBanner';
 
 export default function InformationalSection() {
   return (
@@ -27,6 +28,8 @@ export default function InformationalSection() {
           </ul>
         </div>
       </div>
+
+      <DailyAlertsBanner />
 
       {/* Bottom Section */}
       <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 items-stretch w-full">
