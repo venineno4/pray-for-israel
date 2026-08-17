@@ -162,10 +162,7 @@ export default function DailyAlertsBanner() {
     }
   };
 
-  // If already installed, hide completely
-  if (pwaInstalled) {
-    return null;
-  }
+  // Removed early return for STATE 0
 
   // Determine Button Text
   let buttonText = "Install App";
@@ -200,13 +197,21 @@ export default function DailyAlertsBanner() {
           </p>
         </div>
 
-        <button
-          id="pwa-install-btn"
-          onClick={handleInstallClick}
-          className="block w-full text-center bg-white text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-gray-100 active:scale-[0.97] transition-all duration-200 shadow-lg tracking-wide cursor-pointer text-sm md:text-[15px]"
-        >
-          {buttonText}
-        </button>
+        {pwaInstalled ? (
+          <div className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-white/20 border border-white/30 cursor-default opacity-80">
+            <span className="text-sm md:text-[15px] font-bold text-white tracking-wide">
+              ✓ App Installed
+            </span>
+          </div>
+        ) : (
+          <button
+            id="pwa-install-btn"
+            onClick={handleInstallClick}
+            className="block w-full text-center bg-white text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-gray-100 active:scale-[0.97] transition-all duration-200 shadow-lg tracking-wide cursor-pointer text-sm md:text-[15px]"
+          >
+            {buttonText}
+          </button>
+        )}
 
         <AnimatePresence>
           {showPWAIOSTip && iosDevice && !inAppBrowser && (
