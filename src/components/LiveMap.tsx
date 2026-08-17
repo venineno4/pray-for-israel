@@ -26,6 +26,7 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
     if (geoName === "United States of America" && activeCountries.includes("United States")) return true;
     if (geoName === "South Korea" && activeCountries.includes("South Korea")) return true; 
     if (geoName === "United Kingdom" && activeCountries.includes("United Kingdom")) return true;
+    if (geoName === "S. Sudan" && activeCountries.includes("South Sudan")) return true;
     return false;
   };
 
@@ -92,6 +93,7 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                   if (country === "Bosnia and Herzegovina" && geoName === "Bosnia and Herz.") return true;
                   if (country === "Solomon Islands" && geoName === "Solomon Is.") return true;
                   if (country === "Falkland Islands" && geoName === "Falkland Is.") return true;
+                  if (country === "South Sudan" && geoName === "S. Sudan") return true;
                   return false;
                 });
                 
