@@ -35,7 +35,7 @@ export default function DailyAlertsBanner() {
     let is_ios = detectIOS();
     let is_inapp = detectInAppBrowser();
 
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('force_env')) {
         const env = urlParams.get('force_env');
