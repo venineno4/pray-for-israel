@@ -17,5 +17,11 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://prayforisrael.live/manifest.json"
+    }
   ]
 }

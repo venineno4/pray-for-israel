@@ -35,7 +35,7 @@ export default function DailyAlertsBanner() {
     let is_ios = detectIOS();
     let is_inapp = detectInAppBrowser();
 
-    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('force_env')) {
         const env = urlParams.get('force_env');
@@ -69,6 +69,13 @@ export default function DailyAlertsBanner() {
     if (isStandalone) {
       setPwaInstalled(true);
       try { sendGAEvent('event', 'pwa_standalone_launch'); } catch (_) {}
+    } else if (typeof navigator !== 'undefined' && 'getInstalledRelatedApps' in navigator) {
+      // Check if related PWA is installed in standard browser mode
+      (navigator as any).getInstalledRelatedApps().then((relatedApps: any[]) => {
+        if (relatedApps && relatedApps.length > 0) {
+          setPwaInstalled(true);
+        }
+      }).catch(() => {});
     }
 
     const onBeforeInstall = (e: Event) => {
