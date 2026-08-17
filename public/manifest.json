@@ -1,4 +1,5 @@
 {
+  "id": "/?source=pwa",
   "name": "Pray for Israel Live",
   "short_name": "Pray4Israel",
   "description": "Join the global community praying for Israel in real-time.",
@@ -21,7 +22,8 @@
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://prayforisrael.live/manifest.json"
+      "url": "/manifest.json",
+      "id": "/?source=pwa"
     }
   ]
 }
