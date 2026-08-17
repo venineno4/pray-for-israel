@@ -851,11 +851,6 @@ export const COUNTRIES: CountryData[] = [
     "flag": "🇵🇼"
   },
   {
-    "name": "Palestine",
-    "code": "PS",
-    "flag": "🇵🇸"
-  },
-  {
     "name": "Panama",
     "code": "PA",
     "flag": "🇵🇦"

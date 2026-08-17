@@ -48,10 +48,17 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
 
       const { data, error } = await query;
       if (!error && data) {
-        setActiveCount(data.length);
+        // Filter out Palestine from the live feed
+        const filteredData = data.filter((row: any) => 
+          row.country && 
+          !row.country.toLowerCase().includes("palestine") && 
+          row.country !== "PS"
+        );
+
+        setActiveCount(filteredData.length);
 
         // Aggregate live breakdown
-        const breakdown = data.reduce((acc: Record<string, number>, curr) => {
+        const breakdown = filteredData.reduce((acc: Record<string, number>, curr) => {
           acc[curr.country] = (acc[curr.country] || 0) + 1;
           return acc;
         }, {});
@@ -127,6 +134,13 @@ export default function LiveDashboard({ count: initialCount = 0 }: { count?: num
             break;
           }
         }
+
+        // Filter out Palestine from the historical data
+        allData = allData.filter((row: any) => 
+          row.country && 
+          !row.country.toLowerCase().includes("palestine") && 
+          row.country !== "PS"
+        );
 
         // Global Aggregation
         const totalPrayers = allData.length;
