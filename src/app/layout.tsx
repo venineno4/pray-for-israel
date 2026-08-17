@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: "Pray for Israel Live | 24/7 Global Prayer Map",
   description: "Join the global live prayer for Israel from your country. See who is praying worldwide right now!",
-  manifest: '/manifest.json',
+  manifest: '/api/manifest',
   metadataBase: new URL("https://prayforisrael.live"),
   icons: {
     icon: [
