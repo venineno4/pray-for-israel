@@ -29,40 +29,11 @@ export default function InformationalSection() {
         </div>
       </div>
 
-      <DailyAlertsBanner />
-
       {/* Bottom Section */}
       <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 items-stretch w-full">
-        {/* Left Column */}
-        <div className="flex-1 bg-primary-white rounded-2xl p-6 md:p-8 border-2 border-primary-deepBlue shadow-sm flex flex-col justify-between">
-          <div className="text-center md:text-left">
-            <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Pray with Purpose. Know the Facts.</h4>
-            <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
-              Get the latest news, expert analysis, and urgent prayer points directly from Israeli evangelical believers with boots on the ground.
-            </p>
-          </div>
-          <a
-            href="https://allisraelnews.com/?utm_source=prayforisrael.live&utm_medium=referral&utm_campaign=live-map"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full text-center bg-primary-gold text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-yellow-500 transition-colors shadow-sm"
-          >
-            Read ALL ISRAEL NEWS
-          </a>
-        </div>
-
-        {/* Divider Desktop */}
-        <div className="hidden md:flex flex-col justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="bg-background-light p-3 rounded-full font-bold text-gray-400 border-2 border-gray-100 text-sm shadow-sm">
-            OR
-          </div>
-        </div>
-        
-        {/* Divider Mobile */}
-        <div className="md:hidden flex justify-center items-center my-[-16px] z-10 relative">
-          <div className="bg-background-light px-4 py-2 rounded-full font-bold text-gray-400 border-2 border-gray-100 text-sm shadow-sm">
-            OR
-          </div>
+        {/* Left Column (PWA Banner) */}
+        <div className="flex-1 flex flex-col justify-stretch">
+          <DailyAlertsBanner />
         </div>
 
         {/* Right Column */}

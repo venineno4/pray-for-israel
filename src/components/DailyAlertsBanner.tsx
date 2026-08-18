@@ -182,8 +182,8 @@ export default function DailyAlertsBanner() {
   } // else STATE 1A -> "Install App"
 
   return (
-    <section className="w-full max-w-2xl mx-auto px-4 md:px-0 mt-4 mb-2" ref={containerRef}>
-      <div className="w-full bg-primary-deepBlue rounded-2xl p-6 md:p-8 shadow-xl border border-white/10 flex flex-col justify-between overflow-hidden">
+    <section className="w-full h-full flex flex-col" ref={containerRef}>
+      <div className="flex-1 w-full bg-primary-deepBlue rounded-2xl p-6 md:p-8 shadow-xl border border-white/10 flex flex-col justify-between overflow-hidden">
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center ring-1 ring-white/15 mb-4">
             <svg
