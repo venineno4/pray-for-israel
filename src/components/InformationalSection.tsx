@@ -30,7 +30,7 @@ export default function InformationalSection() {
       </div>
 
       {/* Bottom Section */}
-      <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 items-stretch w-full">
+      <div className="relative flex flex-col md:flex-row gap-6 md:gap-14 items-stretch w-full">
         {/* Left Column (PWA Banner) */}
         <div className="flex-1 flex flex-col justify-stretch">
           <DailyAlertsBanner />
