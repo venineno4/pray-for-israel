@@ -36,6 +36,20 @@ export default function InformationalSection() {
           <DailyAlertsBanner />
         </div>
 
+        {/* Divider Desktop */}
+        <div className="hidden md:flex flex-col justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+          <div className="bg-background-light p-3 rounded-full font-bold text-gray-400 border-2 border-gray-100 text-sm shadow-sm">
+            OR
+          </div>
+        </div>
+        
+        {/* Divider Mobile */}
+        <div className="md:hidden flex justify-center items-center my-[-16px] z-10 relative">
+          <div className="bg-background-light px-4 py-2 rounded-full font-bold text-gray-400 border-2 border-gray-100 text-sm shadow-sm">
+            OR
+          </div>
+        </div>
+
         {/* Right Column */}
         <div className="flex-1 bg-primary-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm flex flex-col justify-between">
           <div className="text-center md:text-left">

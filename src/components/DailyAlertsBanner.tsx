@@ -214,7 +214,7 @@ export default function DailyAlertsBanner() {
           <button
             id="pwa-install-btn"
             onClick={handleInstallClick}
-            className="block w-full text-center bg-white text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-gray-100 active:scale-[0.97] transition-all duration-200 shadow-lg tracking-wide cursor-pointer text-sm md:text-[15px]"
+            className="block w-full text-center bg-primary-gold text-primary-deepBlue font-bold py-3 px-4 rounded-xl hover:bg-yellow-500 active:scale-[0.97] transition-all duration-200 shadow-lg tracking-wide cursor-pointer text-sm md:text-[15px]"
           >
             {buttonText}
           </button>
