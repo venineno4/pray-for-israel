@@ -51,7 +51,7 @@ export default function InformationalSection() {
         </div>
 
         {/* Right Column */}
-        <div className="flex-1 bg-primary-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div className="flex-1 bg-primary-white rounded-2xl p-6 md:p-8 md:pl-16 border border-gray-200 shadow-sm flex flex-col justify-between relative">
           <div className="text-center md:text-left">
             <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Join The Daily Prayer Watch</h4>
             <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
