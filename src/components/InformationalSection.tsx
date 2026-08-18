@@ -30,9 +30,9 @@ export default function InformationalSection() {
       </div>
 
       {/* Bottom Section */}
-      <div className="relative flex flex-col md:flex-row gap-6 md:gap-14 items-stretch w-full">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-14 items-stretch w-full">
         {/* Left Column (PWA Banner) */}
-        <div className="flex-1 flex flex-col justify-stretch">
+        <div className="w-full h-full">
           <DailyAlertsBanner />
         </div>
 
@@ -51,7 +51,7 @@ export default function InformationalSection() {
         </div>
 
         {/* Right Column */}
-        <div className="flex-1 bg-primary-white rounded-2xl p-6 md:p-8 md:pl-16 border border-gray-200 shadow-sm flex flex-col justify-between relative">
+        <div className="w-full h-full bg-primary-white rounded-2xl p-6 md:p-8 md:pl-16 border border-gray-200 shadow-sm flex flex-col justify-between relative">
           <div className="text-center md:text-left">
             <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Join The Daily Prayer Watch</h4>
             <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
