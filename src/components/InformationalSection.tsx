@@ -39,7 +39,7 @@ export default function InformationalSection() {
         <div className="text-center md:text-left">
           <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Join The Daily Prayer Watch</h4>
           <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
-            Sign up to receive a daily newsletter and get fresh news, in-depth analysis, exclusive videos, and specific prayer topics straight from Israel to your inbox.
+            Pray with purpose. Know the facts. Get a daily briefing with firsthand insights from Israeli believers—equipping you to understand what’s happening and know how to pray.
           </p>
         </div>
         <a
