@@ -183,7 +183,7 @@ export default function DailyAlertsBanner() {
 
   return (
     <section className="w-full h-full flex flex-col" ref={containerRef}>
-      <div className="flex-1 w-full bg-primary-deepBlue rounded-2xl p-6 md:p-8 md:pr-16 shadow-xl border border-white/10 flex flex-col justify-between overflow-hidden relative">
+      <div className="flex-1 w-full bg-primary-deepBlue rounded-2xl p-6 md:p-8 md:pl-16 shadow-xl border border-white/10 flex flex-col justify-between overflow-hidden relative">
         <div className="flex flex-col items-center md:items-start text-center md:text-left">
           <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 flex items-center justify-center ring-1 ring-white/15 mb-4">
             <svg

@@ -31,9 +31,22 @@ export default function InformationalSection() {
 
       {/* Bottom Section */}
       <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-14 items-stretch w-full">
-        {/* Left Column (PWA Banner) */}
-        <div className="w-full h-full">
-          <DailyAlertsBanner />
+        {/* Left Column */}
+        <div className="w-full h-full bg-primary-white rounded-2xl p-6 md:p-8 md:pr-16 border border-gray-200 shadow-sm flex flex-col justify-between relative">
+          <div className="text-center md:text-left">
+            <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Join The Daily Prayer Watch</h4>
+            <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
+              Sign up to receive a daily newsletter and get fresh news, in-depth analysis, exclusive videos, and specific prayer topics straight from Israel to your inbox.
+            </p>
+          </div>
+          <a
+            href="https://allisraelnews.com/subscribe-pray-for-israel"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center bg-primary-deepBlue text-primary-white font-bold py-3 px-4 rounded-xl hover:bg-blue-900 transition-colors shadow-sm"
+          >
+            Subscribe
+          </a>
         </div>
 
         {/* Divider Desktop */}
@@ -50,22 +63,9 @@ export default function InformationalSection() {
           </div>
         </div>
 
-        {/* Right Column */}
-        <div className="w-full h-full bg-primary-white rounded-2xl p-6 md:p-8 md:pl-16 border border-gray-200 shadow-sm flex flex-col justify-between relative">
-          <div className="text-center md:text-left">
-            <h4 className="text-lg md:text-xl font-bold text-primary-deepBlue mb-3">Join The Daily Prayer Watch</h4>
-            <p className="text-sm md:text-base text-text-dark opacity-80 mb-6">
-              Sign up to receive a daily newsletter and get fresh news, in-depth analysis, exclusive videos, and specific prayer topics straight from Israel to your inbox.
-            </p>
-          </div>
-          <a
-            href="https://allisraelnews.com/subscribe-pray-for-israel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block w-full text-center bg-primary-deepBlue text-primary-white font-bold py-3 px-4 rounded-xl hover:bg-blue-900 transition-colors shadow-sm"
-          >
-            Subscribe
-          </a>
+        {/* Right Column (PWA Banner) */}
+        <div className="w-full h-full">
+          <DailyAlertsBanner />
         </div>
       </div>
     </div>
