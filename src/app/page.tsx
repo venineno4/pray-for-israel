@@ -10,7 +10,10 @@ export default function Home() {
         <h1 className="text-3xl md:text-5xl font-black text-primary-deepBlue mb-1 md:mb-2 leading-tight tracking-tight">
           Pray for Israel
         </h1>
-        <p className="text-sm md:text-lg text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-xl mx-auto font-bold text-balance">
+        <div className="flex justify-center items-center my-2 md:my-3">
+          <span className="text-2xl md:text-3xl font-serif italic text-primary-gold opacity-90">&amp;</span>
+        </div>
+        <p className="text-xs md:text-sm text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-[260px] md:max-w-[340px] mx-auto font-bold text-balance">
           Show the world: one more watchman is standing with Israel from your country.
         </p>
       </div>
