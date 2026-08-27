@@ -19,8 +19,10 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Event Match Quality (EMQ)
-    const clientIpAddress = req.ip || req.headers.get('x-real-ip') || req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for') || '0.0.0.0';
-    
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const realIp = req.headers.get('x-real-ip');
+    const cfIp = req.headers.get('cf-connecting-ip');
+    const extractedIp = forwardedFor ? forwardedFor.split(',')[0].trim() : (realIp || cfIp || req.ip || '0.0.0.0');
     // Read Meta cookies if available
     const fbp = req.cookies.get('_fbp')?.value;
     const fbc = req.cookies.get('_fbc')?.value;
@@ -43,7 +45,7 @@ export async function POST(req: NextRequest) {
           event_id: eventId,
           event_source_url: eventSourceUrl,
           user_data: {
-            client_ip_address: clientIpAddress.split(',')[0].trim(),
+            client_ip_address: extractedIp,
             client_user_agent: clientUserAgent,
             fbp: fbp,
             fbc: fbc,

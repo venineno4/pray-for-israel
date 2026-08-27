@@ -6,9 +6,11 @@ export async function POST(req: NextRequest) {
     const { eventName, eventId, eventSourceUrl, clientUserAgent, customData } = body;
 
     // Extract IP address correctly from Vercel/Cloudflare headers
-    // Vercel populates req.ip natively. Fallback to common proxy headers.
-    const clientIpAddress = req.ip || req.headers.get('x-real-ip') || req.headers.get('cf-connecting-ip') || req.headers.get('x-forwarded-for') || '0.0.0.0';
-
+    // Prioritize x-forwarded-for as it contains the real client IP in proxy setups.
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const realIp = req.headers.get('x-real-ip');
+    const cfIp = req.headers.get('cf-connecting-ip');
+    const extractedIp = forwardedFor ? forwardedFor.split(',')[0].trim() : (realIp || cfIp || req.ip || '0.0.0.0');
     const pixelId = "1008459651842584";
     const accessToken = process.env.META_ACCESS_TOKEN;
 
@@ -27,7 +29,7 @@ export async function POST(req: NextRequest) {
           event_id: eventId,
           event_source_url: eventSourceUrl,
           user_data: {
-            client_ip_address: clientIpAddress.split(',')[0].trim(),
+            client_ip_address: extractedIp,
             client_user_agent: clientUserAgent,
           },
           custom_data: customData || {},
