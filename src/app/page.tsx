@@ -13,8 +13,8 @@ export default function Home() {
         <div className="flex justify-center items-center my-[-2px] md:my-0">
           <span className="text-2xl md:text-3xl font-serif italic text-primary-gold opacity-90 leading-none">&amp;</span>
         </div>
-        <p className="text-xs md:text-sm text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-[260px] md:max-w-[340px] mx-auto font-bold text-balance mt-0">
-          Show the world: one more watchman is standing with Israel from your country.
+        <p className="text-xs md:text-sm text-text-dark opacity-80 leading-snug md:leading-relaxed max-w-[260px] md:max-w-[340px] mx-auto font-bold text-balance mt-0 line-clamp-2">
+          Show the world one more watchman praying for the peace of Jerusalem.
         </p>
       </div>
 
