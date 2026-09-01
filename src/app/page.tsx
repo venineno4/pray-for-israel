@@ -36,7 +36,7 @@ export default function Home() {
       {/* Footer Section */}
       <footer className="w-full text-center mt-12 md:mt-16 pb-4">
         <p className="text-sm text-gray-500">
-          Sponsored by <a href="https://allisraelnews.com?utm_source=prayforisrael.live&utm_medium=referral&utm_campaign=live-map" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-gray-800 hover:underline transition-colors">All Israel News</a>
+          By <a href="https://allisraelnews.com?utm_source=prayforisrael.live&utm_medium=referral&utm_campaign=live-map" target="_blank" rel="noopener noreferrer" className="font-semibold hover:text-gray-800 hover:underline transition-colors">All Israel News</a>
         </p>
       </footer>
     </main>
