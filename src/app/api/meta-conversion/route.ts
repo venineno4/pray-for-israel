@@ -22,7 +22,12 @@ export async function POST(req: NextRequest) {
     const forwardedFor = req.headers.get('x-forwarded-for');
     const realIp = req.headers.get('x-real-ip');
     const cfIp = req.headers.get('cf-connecting-ip');
-    const extractedIp = forwardedFor ? forwardedFor.split(',')[0].trim() : (realIp || cfIp || req.ip || '0.0.0.0');
+    const extractedIp = forwardedFor ? forwardedFor.split(',')[0].trim() : (realIp || cfIp || req.ip || null);
+
+    // Temporary debug logging – check Vercel logs to verify real client IP
+    console.log('Extracted Client IP:', extractedIp);
+    console.log('x-forwarded-for:', forwardedFor);
+    console.log('x-real-ip:', realIp);
     // Read Meta cookies if available
     const fbp = req.cookies.get('_fbp')?.value;
     const fbc = req.cookies.get('_fbc')?.value;
@@ -35,6 +40,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: "Missing META_ACCESS_TOKEN" }, { status: 500 });
     }
 
+    // Build user_data – only include fields that have real values
+    const userData: Record<string, string> = {};
+    if (extractedIp) userData.client_ip_address = extractedIp;
+    if (clientUserAgent) userData.client_user_agent = clientUserAgent;
+    if (fbp) userData.fbp = fbp;
+    if (fbc) userData.fbc = fbc;
+
     // Prepare the payload for Meta Conversions API
     const payload = {
       data: [
@@ -44,12 +56,7 @@ export async function POST(req: NextRequest) {
           action_source: "website",
           event_id: eventId,
           event_source_url: eventSourceUrl,
-          user_data: {
-            client_ip_address: extractedIp,
-            client_user_agent: clientUserAgent,
-            fbp: fbp,
-            fbc: fbc,
-          },
+          user_data: userData,
           custom_data: {
             content_category: contentCategory,
             content_name: contentName || 'Unknown Country'
