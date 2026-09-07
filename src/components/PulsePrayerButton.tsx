@@ -158,15 +158,24 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
     }
 
     try {
-      await supabase
-        .from("prayers")
-        .insert([{
+      const prayRes = await fetch('/api/pray', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           session_id: sessionIdRef.current || sessionId,
-          user_id: userId,        // persistent anonymous ID for unique tracking
+          user_id: userId,
           country: country,
           real_country: realCountry,
-          is_active: true,
-        }]);
+        }),
+      });
+
+      if (!prayRes.ok) {
+        const errData = await prayRes.json().catch(() => ({}));
+        if (prayRes.status === 429) {
+          console.warn('Rate limited:', errData.error);
+        }
+        throw new Error(errData.error || 'Prayer submission failed');
+      }
         
       // Fire accurate GA4 & Meta events now that the user actually started praying
       try {
