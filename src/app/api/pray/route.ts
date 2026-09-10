@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// --- In-memory sliding window rate limiter ---
-// Each IP gets a list of timestamps. We allow max MAX_REQUESTS within WINDOW_MS.
-const MAX_REQUESTS = 2;
+// --- In-memory sliding window rate limiter (DDoS guard only) ---
+// Relaxed threshold: allows large crowds on shared Wi-Fi (e.g., church networks).
+const MAX_REQUESTS = 60;
 const WINDOW_MS = 10_000; // 10 seconds
 const ipLog = new Map<string, number[]>();
 
@@ -44,6 +44,7 @@ function getSupabase() {
   }
   return _supabase;
 }
+
 export async function POST(req: NextRequest) {
   try {
     // Extract real client IP
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
     const cfIp = req.headers.get('cf-connecting-ip');
     const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : (realIp || cfIp || req.ip || 'unknown');
 
-    // Rate limit check
+    // IP rate limit check (DDoS guard — high threshold)
     if (isRateLimited(clientIp)) {
       console.warn(`[Rate Limit] Blocked prayer submission from IP: ${clientIp}`);
       return NextResponse.json(
@@ -72,6 +73,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // --- Concurrent session check (primary bot defense) ---
+    // If this user_id already has an active prayer, reject the new request.
+    const { data: activeSession, error: checkError } = await getSupabase()
+      .from('prayers')
+      .select('session_id')
+      .eq('user_id', user_id)
+      .eq('is_active', true)
+      .limit(1)
+      .maybeSingle();
+
+    if (checkError) {
+      console.error('[Pray API] Active session check error:', checkError);
+      // Don't block on query errors — fall through to insert
+    } else if (activeSession) {
+      console.warn(`[Pray API] Blocked concurrent session for user_id: ${user_id}, existing session: ${(activeSession as any).session_id}`);
+      return NextResponse.json(
+        { success: false, error: 'You already have an active prayer session.' },
+        { status: 429 }
+      );
+    }
+
     // Insert into Supabase — accept country exactly as sent from frontend
     const { data, error } = await getSupabase()
       .from('prayers')
@@ -88,7 +110,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: error.message }, { status: 500 });
     }
 
-    console.log(`[Pray API] Prayer submitted from IP: ${clientIp}, country: ${country}`);
+    console.log(`[Pray API] Prayer submitted from IP: ${clientIp}, user: ${user_id}, country: ${country}`);
     return NextResponse.json({ success: true });
 
   } catch (err) {
@@ -96,3 +118,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
 }
+
