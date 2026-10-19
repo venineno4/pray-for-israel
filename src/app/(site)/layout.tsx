@@ -3,7 +3,7 @@ import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import MetaPixel from '@/components/MetaPixel';
 import Script from 'next/script';
-import './globals.css';
+import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
