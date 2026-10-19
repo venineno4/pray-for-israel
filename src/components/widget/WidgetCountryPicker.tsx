@@ -29,21 +29,27 @@ function search(term: string): CountryData[] {
 /**
  * Compact in-widget country picker (fits a 300×250 frame).
  * Covers the whole widget, never renders outside of it.
+ *
+ * Single-step, exactly like the main site's CountryModal: choosing a country
+ * (click on a result / the suggested country, or Enter on an unambiguous
+ * match) immediately submits the prayer — there is no confirm button.
  */
 export default function WidgetCountryPicker({ isOpen, onClose, onSubmit }: WidgetCountryPickerProps) {
   const [term, setTerm] = useState("");
-  const [selected, setSelected] = useState<CountryData | null>(null);
   const [highlight, setHighlight] = useState(0);
+  const [navigated, setNavigated] = useState(false);
   const [detected, setDetected] = useState<CountryData | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const submittedRef = useRef(false);
 
   // Reset + focus each time the picker opens
   useEffect(() => {
     if (!isOpen) return;
     setTerm("");
-    setSelected(null);
     setHighlight(0);
+    setNavigated(false);
+    submittedRef.current = false;
     const t = setTimeout(() => inputRef.current?.focus({ preventScroll: true }), 60);
 
     // Suggest the visitor's detected country (same /api/geo the main site uses)
@@ -91,36 +97,40 @@ export default function WidgetCountryPicker({ isOpen, onClose, onSubmit }: Widge
   const handleType = (value: string) => {
     setTerm(value);
     setHighlight(0);
-    const exact = COUNTRIES.find((c) => c.name.toLowerCase() === value.trim().toLowerCase());
-    setSelected(exact || null);
+    setNavigated(false);
   };
 
-  const choose = (c: CountryData) => {
-    setSelected(c);
-    setTerm(c.name);
-    setHighlight(0);
-  };
-
-  const submit = () => {
-    if (selected) onSubmit(selected.name);
+  /** Choosing a country == submitting the prayer (guarded against double fire). */
+  const submit = (c: CountryData) => {
+    if (submittedRef.current) return;
+    submittedRef.current = true;
+    onSubmit(c.name);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const showList = results.length > 0 && !(selected && term === selected.name);
-    if (e.key === "ArrowDown" && showList) {
+    if (e.key === "ArrowDown" && results.length > 0) {
       e.preventDefault();
+      setNavigated(true);
       setHighlight((h) => Math.min(h + 1, results.length - 1));
-    } else if (e.key === "ArrowUp" && showList) {
+    } else if (e.key === "ArrowUp" && results.length > 0) {
       e.preventDefault();
+      setNavigated(true);
       setHighlight((h) => Math.max(h - 1, 0));
     } else if (e.key === "Enter") {
       e.preventDefault();
-      if (selected && term === selected.name) submit();
-      else if (results[highlight]) choose(results[highlight]);
+      // Only submit on an unambiguous choice: exact name, single result,
+      // or a row the user explicitly picked with the arrow keys.
+      const q = term.trim().toLowerCase();
+      const exact = q ? results.find((c) => c.name.toLowerCase() === q) : undefined;
+      const choice =
+        exact ||
+        (results.length === 1 ? results[0] : undefined) ||
+        (navigated ? results[highlight] : undefined);
+      if (choice) submit(choice);
     }
   };
 
-  const showList = results.length > 0 && !(selected && term === selected.name);
+  const showList = results.length > 0;
 
   return (
     <AnimatePresence>
@@ -157,15 +167,10 @@ export default function WidgetCountryPicker({ isOpen, onClose, onSubmit }: Widge
             </div>
 
             <div className="pfw-picker-field">
-              {selected && term === selected.name && (
-                <span className="pfw-picker-field-flag" aria-hidden="true">
-                  {selected.flag}
-                </span>
-              )}
               <input
                 ref={inputRef}
                 type="text"
-                className={`pfw-picker-input ${selected && term === selected.name ? "has-flag" : ""}`}
+                className="pfw-picker-input"
                 placeholder="Enter country name..."
                 value={term}
                 onChange={(e) => handleType(e.target.value)}
@@ -189,7 +194,7 @@ export default function WidgetCountryPicker({ isOpen, onClose, onSubmit }: Widge
                         type="button"
                         className={`pfw-picker-option ${i === highlight ? "is-active" : ""}`}
                         onMouseEnter={() => setHighlight(i)}
-                        onClick={() => choose(c)}
+                        onClick={() => submit(c)}
                       >
                         <span className="pfw-picker-option-flag">{c.flag}</span>
                         <span className="pfw-picker-option-name">{c.name}</span>
@@ -198,16 +203,12 @@ export default function WidgetCountryPicker({ isOpen, onClose, onSubmit }: Widge
                     </li>
                   ))}
                 </ul>
-              ) : term.trim() && !selected ? (
+              ) : term.trim() ? (
                 <p className="pfw-picker-empty">No countries found</p>
-              ) : !selected ? (
+              ) : (
                 <p className="pfw-picker-empty">Start typing your country…</p>
-              ) : null}
+              )}
             </div>
-
-            <button type="button" className="pfw-picker-submit" disabled={!selected} onClick={submit}>
-              Light up my country!
-            </button>
           </motion.div>
         </motion.div>
       )}

@@ -325,15 +325,6 @@
   position: relative;
   flex: 0 0 auto;
 }
-.pfw-picker-field-flag {
-  position: absolute;
-  left: calc(var(--u) * 2.6);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 18px;
-  line-height: 1;
-  pointer-events: none;
-}
 .pfw-picker-input {
   display: block;
   width: 100%;
@@ -349,9 +340,6 @@
   line-height: 1.2;
   outline: none;
   transition: box-shadow 0.15s, border-color 0.15s;
-}
-.pfw-picker-input.has-flag {
-  padding-left: calc(var(--u) * 2.6 + 26px);
 }
 .pfw-picker-input::placeholder {
   color: #9ca3af;
@@ -417,28 +405,6 @@
   font-size: calc(var(--u) * 3.4);
   font-style: italic;
   color: #9ca3af;
-}
-.pfw-picker-submit {
-  flex: 0 0 auto;
-  width: 100%;
-  padding: calc(var(--u) * 2.8) calc(var(--u) * 3);
-  border-radius: 999px;
-  background: var(--pfw-gold);
-  color: var(--pfw-navy);
-  font-size: calc(var(--u) * 4.2);
-  font-weight: 900;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  box-shadow: 0 0 calc(var(--u) * 5) rgba(212, 175, 55, 0.4);
-  transition: opacity 0.2s, transform 0.15s;
-}
-.pfw-picker-submit:not(:disabled):active {
-  transform: scale(0.97);
-}
-.pfw-picker-submit:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  box-shadow: none;
 }
 
 /* ── Animations ───────────────────────────────────────────────────────── */
