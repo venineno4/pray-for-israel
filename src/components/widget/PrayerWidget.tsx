@@ -116,7 +116,7 @@ export default function PrayerWidget() {
             <span className="pfw-badge-dot-core" />
           </span>
           <span className="pfw-badge-text">
-            {count === null ? "–" : count.toLocaleString("en-US")} LIVE {noun} ON MAP
+            LIVE: {count === null ? "–" : count.toLocaleString("en-US")} {noun} ON MAP
           </span>
         </div>
 
