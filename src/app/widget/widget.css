@@ -1,0 +1,467 @@
+/*
+ * Pray for Israel — embeddable widget styles (/widget only).
+ *
+ * Fully self-contained: this file is imported exclusively by the widget's own
+ * root layout and every selector is prefixed with `pfw-`, so nothing here can
+ * affect the main prayforisrael.live page.
+ *
+ * Sizing: everything scales from one unit, --u = min(1vw, 1.2vh).
+ *   300×250 frame → 1u = 3px, 336×280 frame → 1u = 3.36px (6:5 ratio).
+ */
+
+/* ── Minimal reset (the widget does not load the main site's globals.css) ── */
+.pfw-html,
+.pfw-body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+/* Element resets use :where() (zero specificity) so every .pfw-* component
+   class below always wins over them. */
+:where(.pfw-body) *,
+:where(.pfw-body) *::before,
+:where(.pfw-body) *::after {
+  box-sizing: border-box;
+}
+:where(.pfw-body) :where(h1, h2, p, ul) {
+  margin: 0;
+  padding: 0;
+}
+:where(.pfw-body) ul {
+  list-style: none;
+}
+:where(.pfw-body) :where(button, input) {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+}
+:where(.pfw-body) button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+:where(.pfw-body) svg {
+  display: block;
+}
+
+/* ── Root ─────────────────────────────────────────────────────────────── */
+.pfw-root {
+  --u: min(1vw, 1.2vh);
+  --pfw-navy: #0b2b5a;
+  --pfw-gold: #d4af37;
+  --pfw-text: #1e293b;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+  color: var(--pfw-text);
+  user-select: none;
+}
+
+/* ── Header (light) ───────────────────────────────────────────────────── */
+.pfw-header {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: calc(var(--u) * 2.6) calc(var(--u) * 3) calc(var(--u) * 2.2);
+  background: #ffffff;
+  text-decoration: none;
+  color: inherit;
+}
+.pfw-title {
+  font-size: calc(var(--u) * 8.2);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--pfw-navy);
+}
+.pfw-amp {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: calc(var(--u) * 5.2);
+  line-height: 0.85;
+  color: var(--pfw-gold);
+  opacity: 0.9;
+  margin: calc(var(--u) * 0.3) 0 calc(var(--u) * 0.2);
+}
+.pfw-subtitle {
+  font-size: calc(var(--u) * 3.35);
+  font-weight: 700;
+  line-height: 1.28;
+  color: rgba(30, 41, 59, 0.8);
+  text-wrap: balance;
+}
+
+/* ── Stage: live map + overlays ───────────────────────────────────────── */
+.pfw-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #bfdbfe; /* same as main site's map background (Tailwind blue-200) */
+}
+.pfw-map {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pfw-map > div {
+  width: 100%;
+  height: 100%;
+}
+
+/* Live counter badge (top-left) */
+.pfw-badge {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--u) * 2.4);
+  left: calc(var(--u) * 2.4);
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--u) * 1.4);
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 2.6) calc(var(--u) * 1.2) calc(var(--u) * 2);
+  border-radius: 999px;
+  background: rgba(9, 22, 45, 0.86);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 2.6) rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  font-size: calc(var(--u) * 2.75);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.pfw-badge-dot {
+  position: relative;
+  display: inline-flex;
+  width: calc(var(--u) * 1.8);
+  height: calc(var(--u) * 1.8);
+  flex: 0 0 auto;
+}
+.pfw-badge-dot-ping,
+.pfw-badge-dot-core {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+}
+.pfw-badge-dot-ping {
+  background: #f87171;
+  opacity: 0.75;
+  animation: pfw-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.pfw-badge-dot-core {
+  background: #ef4444;
+}
+
+/* CTA (bottom-center) */
+.pfw-cta-wrap {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--u) * 3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 1.2);
+  pointer-events: none;
+}
+.pfw-cta-anchor {
+  position: relative;
+  display: inline-flex;
+  pointer-events: auto;
+}
+.pfw-cta {
+  position: relative;
+  z-index: 1;
+  padding: calc(var(--u) * 2.4) calc(var(--u) * 7);
+  border-radius: 999px;
+  border: calc(var(--u) * 0.6) solid transparent;
+  background: var(--pfw-gold);
+  color: var(--pfw-navy);
+  font-size: calc(var(--u) * 4.2);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 0 calc(var(--u) * 8) rgba(212, 175, 55, 0.55),
+    0 calc(var(--u) * 1) calc(var(--u) * 3) rgba(11, 43, 90, 0.25);
+  transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+}
+.pfw-cta.is-active {
+  background: var(--pfw-navy);
+  color: #ffffff;
+  border-color: var(--pfw-gold);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.pfw-cta:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+.pfw-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  pointer-events: none;
+}
+.pfw-ripple-gold {
+  background: var(--pfw-gold);
+  animation: pfw-ripple 2.5s ease-out infinite;
+}
+.pfw-ripple-blue {
+  background: var(--pfw-navy);
+  animation: pfw-ripple 2.5s ease-out 0.6s infinite;
+}
+.pfw-cta-caption {
+  max-width: 92%;
+  padding: calc(var(--u) * 0.7) calc(var(--u) * 2.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--pfw-navy);
+  font-size: calc(var(--u) * 2.6);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-variant-numeric: tabular-nums;
+  pointer-events: auto;
+}
+.pfw-toast {
+  max-width: 90%;
+  padding: calc(var(--u) * 1.2) calc(var(--u) * 2.6);
+  border-radius: calc(var(--u) * 1.6);
+  border: 1px solid #fecaca;
+  background: #ffffff;
+  color: #b91c1c;
+  font-size: calc(var(--u) * 2.7);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 2.6) rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+/* ── Country picker (covers the whole widget, never overflows it) ─────── */
+.pfw-picker-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: calc(var(--u) * 2.5);
+  background: rgba(11, 43, 90, 0.55);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  user-select: text;
+}
+.pfw-picker {
+  width: 100%;
+  max-width: calc(var(--u) * 120);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 2);
+  padding: calc(var(--u) * 3.2);
+  border-radius: calc(var(--u) * 3);
+  background: #ffffff;
+  box-shadow: 0 calc(var(--u) * 3) calc(var(--u) * 10) rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+.pfw-picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(var(--u) * 2);
+  flex: 0 0 auto;
+}
+.pfw-picker-title {
+  font-size: calc(var(--u) * 4.4);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--pfw-navy);
+}
+.pfw-picker-close {
+  flex: 0 0 auto;
+  width: calc(var(--u) * 6.5);
+  height: calc(var(--u) * 6.5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: #9ca3af;
+  transition: color 0.15s, background-color 0.15s;
+}
+.pfw-picker-close:hover {
+  color: #4b5563;
+  background: #f3f4f6;
+}
+.pfw-picker-close svg {
+  width: 70%;
+  height: 70%;
+}
+.pfw-picker-field {
+  position: relative;
+  flex: 0 0 auto;
+}
+.pfw-picker-field-flag {
+  position: absolute;
+  left: calc(var(--u) * 2.6);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
+}
+.pfw-picker-input {
+  display: block;
+  width: 100%;
+  height: calc(var(--u) * 10.5);
+  min-height: 30px;
+  padding: 0 calc(var(--u) * 3);
+  border: 1px solid #e5e7eb;
+  border-radius: calc(var(--u) * 2.6);
+  background: #ffffff;
+  color: #1f2937;
+  /* 16px prevents iOS Safari from zooming the host page on focus */
+  font-size: 16px;
+  line-height: 1.2;
+  outline: none;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.pfw-picker-input.has-flag {
+  padding-left: calc(var(--u) * 2.6 + 26px);
+}
+.pfw-picker-input::placeholder {
+  color: #9ca3af;
+}
+.pfw-picker-input:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px var(--pfw-gold);
+}
+.pfw-picker-results {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pfw-picker-list {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.pfw-picker-option {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--u) * 2);
+  width: 100%;
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 2.2);
+  border-radius: calc(var(--u) * 1.8);
+  text-align: left;
+  color: #374151;
+  font-size: calc(var(--u) * 4.1);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.pfw-picker-option.is-active {
+  background: #f3f4f6;
+}
+.pfw-picker-option-flag {
+  flex: 0 0 auto;
+  font-size: calc(var(--u) * 5);
+  line-height: 1;
+}
+.pfw-picker-option-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pfw-picker-option-hint {
+  flex: 0 0 auto;
+  font-size: calc(var(--u) * 2.6);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pfw-gold);
+}
+.pfw-picker-empty {
+  margin: auto 0;
+  text-align: center;
+  font-size: calc(var(--u) * 3.4);
+  font-style: italic;
+  color: #9ca3af;
+}
+.pfw-picker-submit {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: calc(var(--u) * 2.8) calc(var(--u) * 3);
+  border-radius: 999px;
+  background: var(--pfw-gold);
+  color: var(--pfw-navy);
+  font-size: calc(var(--u) * 4.2);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  box-shadow: 0 0 calc(var(--u) * 5) rgba(212, 175, 55, 0.4);
+  transition: opacity 0.2s, transform 0.15s;
+}
+.pfw-picker-submit:not(:disabled):active {
+  transform: scale(0.97);
+}
+.pfw-picker-submit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Animations ───────────────────────────────────────────────────────── */
+@keyframes pfw-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes pfw-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.6, 2.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pfw-badge-dot-ping,
+  .pfw-ripple {
+    animation: none;
+  }
+}
