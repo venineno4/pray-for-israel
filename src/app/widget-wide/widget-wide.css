@@ -1,0 +1,63 @@
+/*
+ * Pray for Israel — wide article-footer widget (/widget-wide only).
+ *
+ * Loaded together with the (unchanged) 300×250 widget stylesheet
+ * `src/app/widget/widget.css`, which provides the shared reset, live badge,
+ * CLICK & PRAY / Praying... button and country picker styles.
+ * This file only adds the wide-specific layout; all selectors use the
+ * `pfww-` prefix, so the 300×250 /widget is not affected in any way.
+ *
+ * Sizing: one unit again, but width-aware for wide frames:
+ *   728×250 → 1u ≈ 3px, 780×260 → 1u ≈ 3.12px (same scale as the 300×250 widget,
+ *   so badge, button and picker look identical); narrower frames shrink gracefully.
+ */
+
+.pfw-root.pfww-root {
+  --u: min(0.412vw, 1.2vh);
+}
+
+/* ── Header: one compact horizontal row ──────────────────────────────── */
+.pfww-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--u) * 3);
+  padding: calc(var(--u) * 3.4) calc(var(--u) * 4);
+  background: #ffffff;
+  text-decoration: none;
+  color: inherit;
+}
+.pfww-title {
+  font-size: calc(var(--u) * 11);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--pfw-navy);
+  white-space: nowrap;
+}
+.pfww-amp {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: calc(var(--u) * 9.5);
+  line-height: 1;
+  color: var(--pfw-gold);
+  opacity: 0.9;
+}
+.pfww-subtitle {
+  font-size: calc(var(--u) * 4.1);
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgba(30, 41, 59, 0.8);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* ── Map: show the whole world map, proportionally, without cropping ── */
+/* LiveMap renders <svg style="width:100%;height:auto">, which would crop a
+   very wide/short frame. Fill the stage instead and let the SVG's
+   preserveAspectRatio="xMidYMid meet" letterbox it on the ocean colour. */
+.pfww-map svg {
+  width: 100% !important;
+  height: 100% !important;
+}
