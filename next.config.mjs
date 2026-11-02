@@ -15,6 +15,16 @@ const nextConfig = {
           }
         ],
       },
+      {
+        // Wide article-footer widget — same embedding policy as /widget.
+        source: '/widget-wide',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://*.vercel.app https://allisraelnews.com https://*.allisraelnews.com;"
+          }
+        ],
+      },
     ];
   },
   async redirects() {
