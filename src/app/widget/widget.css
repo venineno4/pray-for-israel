@@ -82,6 +82,11 @@
   background: #ffffff;
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.pfw-header:hover {
+  opacity: 0.85;
 }
 .pfw-title {
   font-size: calc(var(--u) * 8.2);
@@ -127,28 +132,75 @@
   height: 100%;
 }
 
-/* Live counter badge (top-left) */
-.pfw-badge {
+/* Top bar over the map: live badge (left) + "prayforisrael.live ↗" (right).
+   Both are links; the bar itself is click-through so the map stays non-clickable.
+   Compact, nowrap sizing keeps both on one line at 300px even for 3–4 digit counts. */
+.pfw-topbar {
   position: absolute;
   z-index: 2;
   top: calc(var(--u) * 2.4);
   left: calc(var(--u) * 2.4);
+  right: calc(var(--u) * 2.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+.pfw-topbar > a {
+  pointer-events: auto;
+  flex: 0 0 auto;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Live counter badge (top-left) */
+.pfw-badge {
   display: inline-flex;
   align-items: center;
-  gap: calc(var(--u) * 1.4);
-  padding: calc(var(--u) * 1.2) calc(var(--u) * 2.6) calc(var(--u) * 1.2) calc(var(--u) * 2);
+  gap: calc(var(--u) * 1.2);
+  padding: calc(var(--u) * 1.15) calc(var(--u) * 2.2) calc(var(--u) * 1.15) calc(var(--u) * 1.8);
   border-radius: 999px;
   background: rgba(9, 22, 45, 0.86);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 2.6) rgba(0, 0, 0, 0.25);
   color: #ffffff;
-  font-size: calc(var(--u) * 2.75);
+  font-size: calc(var(--u) * 2.5);
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   line-height: 1;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s;
+}
+.pfw-badge:hover {
+  background: rgba(9, 22, 45, 0.96);
+}
+
+/* Discreet main-site link (top-right) */
+.pfw-sitelink {
+  display: inline-flex;
+  align-items: center;
+  padding: calc(var(--u) * 1.15) calc(var(--u) * 2.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 calc(var(--u) * 0.6) calc(var(--u) * 2.6) rgba(0, 0, 0, 0.15);
+  color: var(--pfw-navy);
+  font-size: calc(var(--u) * 2.5);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.15s;
+}
+.pfw-sitelink:hover {
+  background: #ffffff;
+}
+.pfw-topbar > a:focus-visible {
+  outline: 2px solid var(--pfw-gold);
+  outline-offset: 2px;
 }
 .pfw-badge-dot {
   position: relative;
