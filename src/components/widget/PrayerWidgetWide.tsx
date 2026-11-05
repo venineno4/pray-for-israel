@@ -24,6 +24,9 @@ const LiveMap = nextDynamic(() => import("@/components/LiveMap"), {
   loading: () => null,
 });
 
+// Every click-through link (header, live badge, "prayforisrael.live ↗") opens this
+// URL in a new tab (UTM-tagged for analytics). The map background and the CTA area
+// are intentionally NOT links.
 const MAIN_SITE_URL =
   "https://prayforisrael.live/?utm_source=allisraelnews&utm_medium=widget-wide&utm_campaign=live-map";
 
@@ -118,14 +121,26 @@ export default function PrayerWidgetWide() {
           <LiveMap activeCountries={stats.activeCountries} />
         </div>
 
-        <div className="pfw-badge" role="status" aria-live="polite">
-          <span className="pfw-badge-dot">
-            <span className="pfw-badge-dot-ping" />
-            <span className="pfw-badge-dot-core" />
-          </span>
-          <span className="pfw-badge-text">
-            LIVE: {count === null ? "–" : count.toLocaleString("en-US")} {noun} ON MAP
-          </span>
+        {/* Top bar: live badge (left) + discreet site link (right) — both open the main site */}
+        <div className="pfw-topbar">
+          <a
+            className="pfw-badge"
+            href={MAIN_SITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`LIVE: ${count === null ? "–" : count} ${noun} on map – open prayforisrael.live`}
+          >
+            <span className="pfw-badge-dot">
+              <span className="pfw-badge-dot-ping" />
+              <span className="pfw-badge-dot-core" />
+            </span>
+            <span className="pfw-badge-text" aria-live="polite">
+              LIVE: {count === null ? "–" : count.toLocaleString("en-US")} {noun} ON MAP
+            </span>
+          </a>
+          <a className="pfw-sitelink" href={MAIN_SITE_URL} target="_blank" rel="noopener noreferrer">
+            prayforisrael.live ↗
+          </a>
         </div>
 
         <div className="pfw-cta-wrap">

@@ -27,6 +27,11 @@
   background: #ffffff;
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.pfww-header:hover {
+  opacity: 0.85;
 }
 .pfww-title {
   font-size: calc(var(--u) * 11);
