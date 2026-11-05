@@ -17,8 +17,10 @@ const LiveMap = nextDynamic(() => import("@/components/LiveMap"), {
 });
 
 // Every click-through link (header, live badge, "prayforisrael.live ↗") opens this
-// URL in a new tab. The map background and the CTA area are intentionally NOT links.
-const MAIN_SITE_URL = "https://prayforisrael.live";
+// URL in a new tab (UTM-tagged for analytics). The map background and the CTA area
+// are intentionally NOT links.
+const MAIN_SITE_URL =
+  "https://prayforisrael.live/?utm_source=allisraelnews&utm_medium=widget&utm_campaign=live-map";
 
 function formatRemaining(ms: number) {
   const totalSec = Math.max(0, Math.ceil(ms / 1000));
