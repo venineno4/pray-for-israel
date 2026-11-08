@@ -7,7 +7,8 @@ import { ensureGtag, getWidgetPlacement, type WidgetVariant } from "./widgetTrac
 /**
  * GA4 for the embeddable widgets — same Measurement ID as the main site, but:
  *   - `send_page_view: false`: host-page (allisraelnews.com) loads never create page_views
- *   - `cookie_flags: 'SameSite=None;Secure'`: required for cookies inside a cross-site iframe
+ *   - `cookie_flags: 'SameSite=None;Secure;Partitioned'`: cookies inside a cross-site iframe
+ *     (Partitioned = CHIPS, keeps the GA client id per host site where 3P cookies are restricted)
  *   - campaign source/medium/name set per placement, so widget sessions get their own
  *     "Session source / medium" rows (allisraelnews / widget-sidebar | widget-article-desktop
  *     | widget-article-mobile)
@@ -21,7 +22,7 @@ export default function WidgetAnalytics({ gaId, variant }: { gaId?: string; vari
     gtag("js", new Date());
     gtag("config", gaId, {
       send_page_view: false,
-      cookie_flags: "SameSite=None;Secure",
+      cookie_flags: "SameSite=None;Secure;Partitioned",
       campaign_source: "allisraelnews",
       campaign_medium: getWidgetPlacement(variant),
       campaign_name: "live-map",
