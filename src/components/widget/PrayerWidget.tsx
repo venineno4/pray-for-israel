@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLivePrayerStats } from "./useLivePrayerStats";
 import { useWidgetPrayerSession } from "./useWidgetPrayerSession";
 import WidgetCountryPicker from "./WidgetCountryPicker";
+import { trackWidgetPrayer, useMainSiteUrl } from "./widgetTracking";
 
 // Same map component as the main site (unchanged), so both maps look and
 // light up identically from the same realtime data.
@@ -16,11 +17,10 @@ const LiveMap = nextDynamic(() => import("@/components/LiveMap"), {
   loading: () => null,
 });
 
-// Every click-through link (header, live badge, "prayforisrael.live ↗") opens this
-// URL in a new tab (UTM-tagged for analytics). The map background and the CTA area
-// are intentionally NOT links.
-const MAIN_SITE_URL =
-  "https://prayforisrael.live/?utm_source=allisraelnews&utm_medium=widget&utm_campaign=live-map";
+// Every click-through link (header, live badge, "prayforisrael.live ↗") opens the
+// main site in a new tab, UTM-tagged per device (see useMainSiteUrl). The map
+// background and the CTA area are intentionally NOT links.
+const VARIANT = "sidebar" as const;
 
 function formatRemaining(ms: number) {
   const totalSec = Math.max(0, Math.ceil(ms / 1000));
@@ -33,12 +33,15 @@ export default function PrayerWidget() {
   const stats = useLivePrayerStats();
   const [pickerOpen, setPickerOpen] = useState(false);
   const [now, setNow] = useState(() => Date.now());
+  const MAIN_SITE_URL = useMainSiteUrl(VARIANT);
 
   const session = useWidgetPrayerSession({
     onStarted: (country) => {
       // Counter bumps instantly; then resync with the DB (also triggered by realtime)
       stats.applyOptimistic(country);
       stats.refresh();
+      // Same GA4 event as the main site (+ widget_placement); runs only after /api/pray succeeded
+      trackWidgetPrayer(VARIANT, country);
     },
     onStopped: () => {
       stats.refresh();
