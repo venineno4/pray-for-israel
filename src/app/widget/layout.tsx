@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./widget.css";
-import WidgetAnalytics from "@/components/widget/WidgetAnalytics";
 
 /**
  * Root layout for the embeddable /widget route.
@@ -30,8 +29,8 @@ export default function WidgetLayout({ children }: { children: React.ReactNode }
     <html lang="en" className="pfw-html">
       <body className={`${inter.className} pfw-body`}>
         {children}
-        {/* GA4 (same ID as the main site) with send_page_view:false — no Meta Pixel / OneSignal */}
-        <WidgetAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} variant="sidebar" />
+        {/* GA4 is NOT loaded here: it is initialised lazily only after a successful
+            prayer (see components/widget/widgetTracking.ts). No Meta Pixel / OneSignal. */}
       </body>
     </html>
   );
