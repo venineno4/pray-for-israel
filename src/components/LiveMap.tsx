@@ -27,6 +27,19 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
     if (geoName === "South Korea" && activeCountries.includes("South Korea")) return true; 
     if (geoName === "United Kingdom" && activeCountries.includes("United Kingdom")) return true;
     if (geoName === "S. Sudan" && activeCountries.includes("South Sudan")) return true;
+    if (geoName === "Congo" && activeCountries.includes("Republic of the Congo")) return true;
+    if (geoName === "Dem. Rep. Congo" && activeCountries.includes("DR Congo")) return true;
+    if (geoName === "Côte d'Ivoire" && activeCountries.includes("Ivory Coast")) return true;
+    if (geoName === "eSwatini" && activeCountries.includes("Eswatini")) return true;
+    if (geoName === "Macedonia" && activeCountries.includes("North Macedonia")) return true;
+    if (geoName === "W. Sahara" && activeCountries.includes("Western Sahara")) return true;
+    if (geoName === "Fr. S. Antarctic Lands" && activeCountries.includes("French Southern and Antarctic Lands")) return true;
+    if (geoName === "Eq. Guinea" && activeCountries.includes("Equatorial Guinea")) return true;
+    if (geoName === "Central African Rep." && activeCountries.includes("Central African Republic")) return true;
+    if (geoName === "Dominican Rep." && activeCountries.includes("Dominican Republic")) return true;
+    if (geoName === "Bosnia and Herz." && activeCountries.includes("Bosnia and Herzegovina")) return true;
+    if (geoName === "Solomon Is." && activeCountries.includes("Solomon Islands")) return true;
+    if (geoName === "Falkland Is." && activeCountries.includes("Falkland Islands")) return true;
     return false;
   };
 
@@ -94,6 +107,12 @@ const LiveMap = ({ activeCountries }: LiveMapProps) => {
                   if (country === "Solomon Islands" && geoName === "Solomon Is.") return true;
                   if (country === "Falkland Islands" && geoName === "Falkland Is.") return true;
                   if (country === "South Sudan" && geoName === "S. Sudan") return true;
+                  if (country === "Republic of the Congo" && geoName === "Congo") return true;
+                  if (country === "Ivory Coast" && geoName === "Côte d'Ivoire") return true;
+                  if (country === "Eswatini" && geoName === "eSwatini") return true;
+                  if (country === "North Macedonia" && geoName === "Macedonia") return true;
+                  if (country === "Western Sahara" && geoName === "W. Sahara") return true;
+                  if (country === "French Southern and Antarctic Lands" && geoName === "Fr. S. Antarctic Lands") return true;
                   return false;
                 });
                 
