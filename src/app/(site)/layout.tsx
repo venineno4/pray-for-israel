@@ -3,6 +3,7 @@ import { Metadata, Viewport } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import MetaPixel from '@/components/MetaPixel';
 import Script from 'next/script';
+import { PWA_GA_CAMPAIGN_SCRIPT } from '@/utils/pwaMode';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -70,6 +71,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
+        {/* Installed-PWA launches: queue pwa/installed-app campaign before GA4's config (no-op in a normal browser) */}
+        {gaId && <script id="pwa-ga-campaign" dangerouslySetInnerHTML={{ __html: PWA_GA_CAMPAIGN_SCRIPT }} />}
       </head>
       <body className={`${inter.className} bg-primary-white text-text-dark antialiased`}>
         {children}

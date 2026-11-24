@@ -5,6 +5,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 import { useState, useEffect, useRef } from "react";
 import CountryModal from "./CountryModal";
 import { supabase } from "@/utils/supabaseClient";
+import { isPwaStandalone } from "@/utils/pwaMode";
 
 
 
@@ -179,7 +180,7 @@ export default function PulsePrayerButton({ label = "Click & Pray" }: { label?: 
         
       // Fire accurate GA4 & Meta events now that the user actually started praying
       try {
-        sendGAEvent('event', 'prayer_successfully_started', { country: country });
+        sendGAEvent('event', 'prayer_successfully_started', { country: country, launch_mode: isPwaStandalone() ? 'pwa' : 'browser' });
       } catch (_) {}
       try {
         const eventId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2) + Date.now().toString(36);

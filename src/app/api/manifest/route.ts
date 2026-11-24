@@ -10,7 +10,7 @@ export function GET(request: Request) {
     name: "Pray for Israel Live",
     short_name: "Pray4Israel",
     description: "Join the global community praying for Israel in real-time.",
-    start_url: `${baseUrl}/?source=pwa`,
+    start_url: `${baseUrl}/?utm_source=pwa&utm_medium=installed-app&utm_campaign=pwa-home`,
     display: "standalone",
     background_color: "#FFFFFF",
     theme_color: "#FFFFFF",
